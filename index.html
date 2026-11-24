@@ -1,2570 +1,1783 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loft Mahmoud Awed</title>
-    <style>
-        /* =========================================================
-           LUXURY DARK THEME DESIGN TOKENS
-           ========================================================= */
-        :root {
-            --bg-obsidian: #0a0d14;
-            --surface-card: #121724;
-            --surface-elevated: #161d2c;
-            --surface-input: #0d121c;
-            --border-metal: #253046;
-            --border-subtle: #1c2537;
-            --text-primary: #f1f5f9;
-            --text-muted: #94a3b8;
-            --gold: #d4af37;
-            --gold-bright: #e2c055;
-            --gold-dim: rgba(212, 175, 55, 0.14);
-            --gold-border: rgba(226, 192, 85, 0.42);
-            --male: #60a5fa;
-            --male-bg: rgba(59, 130, 246, 0.14);
-            --male-border: rgba(59, 130, 246, 0.35);
-            --female: #fb7185;
-            --female-bg: rgba(244, 63, 94, 0.14);
-            --female-border: rgba(244, 63, 94, 0.35);
-            --danger: #f87171;
-            --danger-bg: rgba(239, 68, 68, 0.14);
-            --danger-border: rgba(239, 68, 68, 0.35);
-            --success: #4ade80;
-            --success-bg: rgba(34, 197, 94, 0.14);
-            --success-border: rgba(34, 197, 94, 0.35);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--bg-obsidian);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding-bottom: 52px;
-            line-height: 1.46;
-            color-scheme: dark;
-        }
-
-        /* =========================================================
-           TOP HEADER & NAVIGATION (NO LOGO)
-           ========================================================= */
-        header {
-            background: linear-gradient(180deg, #121724 0%, #0a0d14 100%);
-            border-bottom: 1px solid var(--border-metal);
-            position: sticky;
-            top: 0;
-            z-index: 30;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.58);
-        }
-
-        .top-wrap {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 13px 14px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.26rem;
-            font-weight: 800;
-            letter-spacing: 0.35px;
-            margin-bottom: 11px;
-        }
-
-        .brand span {
-            background: linear-gradient(90deg, #ffffff 0%, var(--gold-bright) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        nav {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 7px;
-        }
-
-        .nav-btn {
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-metal);
-            color: var(--text-muted);
-            padding: 9px 4px;
-            border-radius: 10px;
-            font-size: 0.86rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.16s ease;
-        }
-
-        .nav-btn:hover {
-            background-color: var(--surface-elevated);
-            color: var(--text-primary);
-            border-color: #364563;
-        }
-
-        .nav-btn.active {
-            background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
-            border-color: var(--gold-bright);
-            color: var(--bg-obsidian);
-            font-weight: 800;
-            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.28);
-        }
-
-        /* =========================================================
-           MAIN LAYOUT & TOOLBARS
-           ========================================================= */
-        main {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 16px 14px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .toolbar {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .search-row {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .filter-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 9px;
-        }
-
-        .pills {
-            display: flex;
-            gap: 7px;
-        }
-
-        .pill-btn {
-            background-color: var(--surface-card);
-            border: 1.5px solid var(--border-metal);
-            color: var(--text-muted);
-            padding: 7px 18px;
-            border-radius: 999px;
-            font-size: 0.84rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.16s ease;
-        }
-
-        .pill-btn:hover {
-            border-color: var(--gold-border);
-            color: var(--text-primary);
-        }
-
-        .pill-btn.active {
-            background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
-            border-color: var(--gold-bright);
-            color: var(--bg-obsidian);
-            font-weight: 800;
-        }
-
-        .count-badge {
-            background-color: var(--surface-elevated);
-            border: 1px solid var(--gold-border);
-            color: var(--gold-bright);
-            padding: 7px 13px;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 800;
-            white-space: nowrap;
-        }
-
-        /* =========================================================
-           FORM CONTROLS
-           ========================================================= */
-        .input, .select, .textarea {
-            width: 100%;
-            background-color: var(--surface-input);
-            border: 1.5px solid var(--border-metal);
-            border-radius: 10px;
-            padding: 10px 12px;
-            font-size: 0.92rem;
-            color: var(--text-primary);
-            outline: none;
-            transition: border-color 0.16s, box-shadow 0.16s;
-        }
-
-        .textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        .input::placeholder, .textarea::placeholder {
-            color: #5a6a86;
-        }
-
-        .input:focus, .select:focus, .textarea:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
-        }
-
-        .input-sm {
-            padding: 7px 9px;
-            font-size: 0.82rem;
-            border-radius: 8px;
-        }
-
-        /* =========================================================
-           BIRD CARDS GRID
-           ========================================================= */
-        .cards-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        @media (min-width: 640px) {
-            .cards-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .bird-card {
-            background: linear-gradient(180deg, var(--surface-elevated) 0%, var(--surface-card) 100%);
-            border: 1px solid var(--border-metal);
-            border-radius: 14px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.36);
-            transition: border-color 0.16s ease;
-        }
-
-        .bird-card:hover {
-            border-color: var(--gold-border);
-        }
-
-        .card-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .ring-btn {
-            background: none;
-            border: none;
-            padding: 0;
-            font-size: 1.12rem;
-            font-weight: 800;
-            color: var(--gold-bright);
-            cursor: pointer;
-            text-align: left;
-            letter-spacing: 0.25px;
-            text-decoration: underline;
-            text-decoration-color: transparent;
-            transition: text-decoration-color 0.15s;
-        }
-
-        .ring-btn:hover {
-            text-decoration-color: var(--gold-bright);
-        }
-
-        .badges {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .year-tag {
-            background-color: var(--bg-obsidian);
-            border: 1px solid var(--border-metal);
-            color: var(--text-primary);
-            font-size: 0.78rem;
-            font-weight: 700;
-            padding: 3px 9px;
-            border-radius: 7px;
-        }
-
-        .sex-tag {
-            font-size: 0.78rem;
-            font-weight: 700;
-            padding: 3px 9px;
-            border-radius: 7px;
-        }
-
-        .sex-m {
-            background-color: var(--male-bg);
-            border: 1px solid var(--male-border);
-            color: var(--male);
-        }
-
-        .sex-f {
-            background-color: var(--female-bg);
-            border: 1px solid var(--female-border);
-            color: var(--female);
-        }
-
-        .parents-row {
-            background-color: rgba(10, 13, 20, 0.65);
-            border: 1px solid var(--border-subtle);
-            border-radius: 9px;
-            padding: 8px 11px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.82rem;
-            gap: 8px;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-
-        .parents-row strong {
-            color: var(--text-primary);
-        }
-
-        .ring-link {
-            background: none;
-            border: none;
-            color: var(--gold-bright);
-            font-weight: 700;
-            text-decoration: underline;
-            text-decoration-color: var(--gold-border);
-            cursor: pointer;
-            font-size: 0.82rem;
-            padding: 0;
-        }
-
-        .offspring-row {
-            font-size: 0.8rem;
-            color: var(--text-primary);
-            background-color: var(--gold-dim);
-            border: 1px solid var(--gold-border);
-            padding: 6px 10px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .offspring-row strong {
-            color: var(--gold-bright);
-        }
-
-        .kid-chip {
-            background-color: var(--bg-obsidian);
-            border: 1px solid var(--gold-border);
-            color: var(--text-primary);
-            border-radius: 999px;
-            padding: 2px 9px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .kid-chip:hover {
-            background-color: var(--gold);
-            color: var(--bg-obsidian);
-        }
-
-        .note-line {
-            font-size: 0.82rem;
-            color: #cbd5e1;
-            background-color: rgba(10, 13, 20, 0.45);
-            border-left: 3px solid var(--gold);
-            padding: 6px 10px;
-            border-radius: 5px;
-            white-space: pre-line;
-        }
-
-        .actions-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 6px;
-            padding-top: 9px;
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .btn-group {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        /* =========================================================
-           BUTTONS
-           ========================================================= */
-        .btn {
-            border: 1px solid transparent;
-            border-radius: 9px;
-            padding: 7px 11px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
-            border-color: var(--gold-bright);
-            color: var(--bg-obsidian);
-            font-weight: 800;
-        }
-
-        .btn-gold:hover {
-            filter: brightness(1.06);
-        }
-
-        .btn-slate {
-            background-color: var(--surface-elevated);
-            border-color: var(--border-metal);
-            color: var(--text-primary);
-        }
-
-        .btn-slate:hover {
-            border-color: var(--gold-border);
-        }
-
-        .btn-ped {
-            background-color: var(--gold-dim);
-            color: var(--gold-bright);
-            border: 1px solid var(--gold-border);
-            font-weight: 700;
-        }
-
-        .btn-ped:hover {
-            background-color: rgba(212, 175, 55, 0.24);
-        }
-
-        .btn-promote {
-            background-color: var(--success-bg);
-            color: var(--success);
-            border: 1px solid var(--success-border);
-            font-weight: 700;
-        }
-
-        .btn-ghost {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-color: var(--border-metal);
-            color: var(--text-muted);
-        }
-
-        .btn-ghost:hover {
-            color: var(--text-primary);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-danger {
-            background-color: var(--danger-bg);
-            border-color: var(--danger-border);
-            color: var(--danger);
-        }
-
-        .btn-lg {
-            width: 100%;
-            padding: 12px;
-            font-size: 0.94rem;
-            border-radius: 11px;
-        }
-
-        /* =========================================================
-           PANELS & LINEAGE FORM
-           ========================================================= */
-        .panel {
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-metal);
-            border-radius: 14px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36);
-        }
-
-        .lbl {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: #cbd5e1;
-        }
-
-        .lbl-xs {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: var(--text-muted);
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .grid-ring-year {
-            display: grid;
-            grid-template-columns: 1.55fr 1fr;
-            gap: 7px;
-        }
-
-        .cat-switch {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .cat-switch input {
-            display: none;
-        }
-
-        .cat-switch span {
-            display: block;
-            text-align: center;
-            padding: 10px;
-            background-color: var(--surface-input);
-            border: 1.5px solid var(--border-metal);
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: all 0.15s ease;
-        }
-
-        .cat-switch input:checked + span {
-            border-color: var(--gold);
-            background-color: var(--gold-dim);
-            color: var(--gold-bright);
-        }
-
-        .lineage-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .gen-divider {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-metal);
-            padding-bottom: 5px;
-            margin-top: 4px;
-        }
-
-        .gen-divider span {
-            font-size: 0.82rem;
-            font-weight: 800;
-            color: var(--gold-bright);
-            letter-spacing: 0.25px;
-        }
-
-        .gen-divider small {
-            font-size: 0.74rem;
-            color: var(--text-muted);
-        }
-
-        .lin-card {
-            background-color: var(--surface-elevated);
-            border: 1px solid var(--border-metal);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .lin-card.subject-card {
-            background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, var(--surface-elevated) 100%);
-            border-color: var(--gold-border);
-        }
-
-        .lin-card.sire-card {
-            border-left: 4px solid var(--male);
-        }
-
-        .lin-card.dam-card {
-            border-left: 4px solid var(--female);
-        }
-
-        .lin-card-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 6px;
-            font-size: 0.83rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .lin-badge {
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 999px;
-            background-color: var(--bg-obsidian);
-            border: 1px solid var(--border-metal);
-            color: var(--gold-bright);
-            white-space: nowrap;
-        }
-
-        .quick-fill-btn {
-            background-color: var(--gold-dim);
-            border: 1px solid var(--gold-border);
-            color: var(--gold-bright);
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 999px;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .quick-fill-btn:hover {
-            background-color: var(--gold);
-            color: var(--bg-obsidian);
-        }
-
-        .gp-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        @media (min-width: 680px) {
-            .gp-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .empty-box {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px 16px;
-            background: var(--surface-card);
-            border: 1.5px dashed var(--border-metal);
-            border-radius: 14px;
-            color: var(--text-muted);
-            font-size: 0.92rem;
-        }
-
-        .empty-box strong {
-            color: var(--gold-bright);
-        }
-
-        /* =========================================================
-           PEDIGREE MODAL (PURE WHITE CERTIFICATE + THIN TYPOGRAPHY)
-           ========================================================= */
-        .modal-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 50;
-            background-color: rgba(4, 6, 10, 0.88);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        .ped-box {
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-metal);
-            border-radius: 14px;
-            width: 100%;
-            max-width: 1180px;
-            max-height: 95vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 22px 54px rgba(0, 0, 0, 0.78);
-        }
-
-        .ped-bar {
-            background-color: var(--bg-obsidian);
-            border-bottom: 1px solid var(--border-metal);
-            color: var(--text-primary);
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .ped-scroll {
-            overflow: auto;
-            padding: 14px;
-            background-color: var(--surface-elevated);
-        }
-
-        /* Pure White Certificate Sheet with Thin, Refined Typography & NO Logo */
-        .ped-sheet {
-            background-color: #ffffff !important;
-            color: #1e293b !important;
-            border: 1.25px solid #334155;
-            border-radius: 6px;
-            padding: 13px 16px;
-            min-width: 980px;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
-            font-weight: 400;
-        }
-
-        .ped-top-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid #cbd5e1;
-            padding-bottom: 7px;
-            margin-bottom: 11px;
-            gap: 14px;
-        }
-
-        .ped-loft-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-            text-align: left;
-        }
-
-        .ped-loft-name {
-            font-size: 0.78rem;
-            font-weight: 500;
-            color: #0f172a;
-            letter-spacing: 0.2px;
-            line-height: 1.25;
-        }
-
-        .ped-loft-sub {
-            font-size: 0.62rem;
-            font-weight: 400;
-            color: #475569;
-            line-height: 1.25;
-        }
-
-        .ped-loft-phone {
-            font-size: 0.62rem;
-            font-weight: 400;
-            color: #64748b;
-            letter-spacing: 0.2px;
-            line-height: 1.25;
-        }
-
-        .ped-bird-info {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-        }
-
-        .ped-bird-ring {
-            font-size: 0.76rem;
-            font-weight: 500;
-            color: #0f172a;
-            line-height: 1.25;
-        }
-
-        .ped-bird-meta {
-            font-size: 0.6rem;
-            font-weight: 400;
-            color: #475569;
-            line-height: 1.25;
-        }
-
-        /* 4-Column Horizontal Tree: Subject Bird -> Parents (2) -> Grandparents (4) -> Great-Grandparents (8) */
-        .ped-cols-4 {
-            display: grid;
-            grid-template-columns: 0.92fr 0.98fr 1.04fr 1.16fr;
-            gap: 20px;
-            align-items: stretch;
-        }
-
-        .ped-col {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 6px;
-        }
-
-        .col-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            gap: 6px;
-        }
-
-        .pair-wrap {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            gap: 6px;
-            position: relative;
-            flex: 1;
-        }
-
-        /* Thin Geometric Connector Lines */
-        .branch-right {
-            position: relative;
-        }
-
-        .branch-right::after {
-            content: "";
-            position: absolute;
-            right: -10px;
-            top: 50%;
-            width: 10px;
-            height: 1px;
-            background-color: #64748b;
-        }
-
-        .pair-wrap::before {
-            content: "";
-            position: absolute;
-            left: -10px;
-            top: 25%;
-            bottom: 25%;
-            width: 10px;
-            border-top: 1px solid #64748b;
-            border-bottom: 1px solid #64748b;
-            border-left: 1px solid #64748b;
-        }
-
-        .node-card {
-            border: 1px solid #cbd5e1;
-            border-radius: 5px;
-            padding: 6px 8px;
-            background-color: #ffffff;
-            color: #1e293b;
-            min-height: 56px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 2px;
-        }
-
-        .node-card.main-bird {
-            border: 1.25px solid #475569;
-            background-color: #fafafa;
-            padding: 9px 10px;
-            min-height: 88px;
-        }
-
-        .node-card.ggp-card {
-            min-height: 43px;
-            padding: 4px 7px;
-            gap: 1px;
-        }
-
-        .node-card.sire-b {
-            border-left: 2.5px solid #3b82f6;
-        }
-
-        .node-card.dam-b {
-            border-left: 2.5px solid #e11d48;
-        }
-
-        .node-card.clickable {
-            cursor: pointer;
-            transition: border-color 0.15s, background-color 0.15s;
-        }
-
-        .node-card.clickable:hover {
-            border-color: #0f172a;
-            background-color: #f8fafc;
-        }
-
-        .n-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 4px;
-        }
-
-        .n-ring {
-            font-weight: 500;
-            font-size: 0.78rem;
-            color: #0f172a;
-            line-height: 1.25;
-            word-break: break-word;
-        }
-
-        .node-card.main-bird .n-ring {
-            font-size: 0.86rem;
-            font-weight: 500;
-        }
-
-        .node-card.ggp-card .n-ring {
-            font-size: 0.7rem;
-            font-weight: 500;
-        }
-
-        .n-year-sex {
-            font-size: 0.62rem;
-            font-weight: 400;
-            color: #475569;
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 1px 5px;
-            border-radius: 3px;
-            white-space: nowrap;
-        }
-
-        .node-card.ggp-card .n-year-sex {
-            font-size: 0.58rem;
-            padding: 0 4px;
-        }
-
-        .n-details {
-            font-size: 0.66rem;
-            font-weight: 400;
-            color: #475569;
-            line-height: 1.3;
-            word-break: break-word;
-            white-space: pre-line;
-        }
-
-        .node-card.ggp-card .n-details {
-            font-size: 0.6rem;
-            line-height: 1.22;
-        }
-
-        /* =========================================================
-           CONFIRMATION DIALOG & TOAST
-           ========================================================= */
-        .confirm-card {
-            background: var(--surface-card);
-            border: 1px solid var(--border-metal);
-            border-radius: 14px;
-            padding: 22px;
-            max-width: 360px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 22px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--surface-elevated);
-            color: var(--gold-bright);
-            border: 1px solid var(--gold);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            z-index: 60;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
-            white-space: nowrap;
-        }
-
-        /* =========================================================
-           PRINT / PDF LANDSCAPE RULES
-           ========================================================= */
-        @media print {
-            body {
-                background: #ffffff !important;
-                color: #1e293b !important;
-                color-scheme: light !important;
-            }
-            body * { visibility: hidden; }
-            #pedModal, #pedModal * { visibility: visible; }
-            #pedModal {
-                position: absolute;
-                inset: 0;
-                background: #ffffff !important;
-                padding: 0 !important;
-                backdrop-filter: none !important;
-            }
-            .ped-box {
-                max-width: 100% !important;
-                max-height: none !important;
-                border: none !important;
-                border-radius: 0 !important;
-                box-shadow: none !important;
-                background: #ffffff !important;
-            }
-            .ped-bar { display: none !important; }
-            .ped-scroll {
-                padding: 0 !important;
-                overflow: visible !important;
-                background: #ffffff !important;
-            }
-            .ped-sheet {
-                min-width: 100% !important;
-                width: 100% !important;
-                border: 1px solid #334155 !important;
-                box-shadow: none !important;
-                padding: 9px 11px !important;
-            }
-            @page { size: A4 landscape; margin: 7mm; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loft Mahmoud Awed</title>
+  <style>
+    /* =====================================================================
+       LUXURY DARK OBSIDIAN & GOLD THEME TOKENS
+       ===================================================================== */
+    :root {
+      --bg-obsidian: #0a0d14;
+      --surface-card: #121724;
+      --surface-elevated: #161d2c;
+      --surface-input: #0b0f18;
+      --border-subtle: #1e283c;
+      --border-metal: #26324a;
+      --gold: #d4af37;
+      --gold-bright: #e2c055;
+      --gold-dim: rgba(212, 175, 55, 0.14);
+      --gold-border: rgba(226, 192, 85, 0.42);
+      --male: #60a5fa;
+      --male-bg: rgba(96, 165, 250, 0.14);
+      --male-border: rgba(96, 165, 250, 0.36);
+      --female: #fb7185;
+      --female-bg: rgba(251, 113, 133, 0.14);
+      --female-border: rgba(251, 113, 133, 0.36);
+      --danger: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.14);
+      --danger-border: rgba(248, 113, 113, 0.36);
+      --success: #4ade80;
+      --success-bg: rgba(74, 222, 128, 0.14);
+      --success-border: rgba(74, 222, 128, 0.36);
+      --text-primary: #f1f5f9;
+      --text-muted: #94a3b8;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.45;
+      padding-bottom: 56px;
+      color-scheme: dark;
+    }
+
+    /* =====================================================================
+       HEADER & NAVIGATION (Offspring, Parents, Add, Backup)
+       ===================================================================== */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: linear-gradient(180deg, #131927 0%, #0d121c 100%);
+      border-bottom: 1px solid var(--border-metal);
+      padding: 14px 18px;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.35px;
+      color: var(--gold-bright);
+    }
+
+    .brand-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-metal);
+      border-radius: var(--radius-sm);
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--gold-border);
+      color: var(--gold-bright);
+    }
+
+    .nav-btn.active {
+      background: var(--gold-dim);
+      border-color: var(--gold-bright);
+      color: var(--gold-bright);
+    }
+
+    /* =====================================================================
+       MAIN CONTAINER, CARDS, FORMS & BUTTONS
+       ===================================================================== */
+    .main-container {
+      max-width: 1200px;
+      margin: 22px auto 0;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-metal);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+    }
+
+    .section-meta {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+
+    input[type="text"],
+    input[type="search"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--surface-input);
+      color: var(--text-primary);
+      border: 1px solid var(--border-metal);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--gold-bright);
+    }
+
+    textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .search-input {
+      flex: 1 1 240px;
+      max-width: 340px;
+    }
+
+    .filter-select {
+      width: auto;
+      min-width: 150px;
+    }
+
+    .btn {
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-metal);
+      border-radius: var(--radius-sm);
+      padding: 9px 14px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--gold-border);
+      color: var(--gold-bright);
+    }
+
+    .btn-gold {
+      background: var(--gold-dim);
+      border-color: var(--gold-bright);
+      color: var(--gold-bright);
+    }
+
+    .btn-gold:hover {
+      background: rgba(212, 175, 55, 0.24);
+    }
+
+    .btn-danger {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: rgba(248, 113, 113, 0.24);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .badge-male {
+      color: var(--male);
+      background: var(--male-bg);
+      border-color: var(--male-border);
+    }
+
+    .badge-female {
+      color: var(--female);
+      background: var(--female-bg);
+      border-color: var(--female-border);
+    }
+
+    .badge-parent {
+      color: var(--gold-bright);
+      background: var(--gold-dim);
+      border-color: var(--gold-border);
+    }
+
+    .bird-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .bird-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .bird-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .bird-ring {
+      font-size: 1.04rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .bird-year {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .bird-line {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .bird-line strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .bird-notes {
+      margin-top: 8px;
+      padding: 8px 10px;
+      background: var(--surface-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      color: var(--text-primary);
+      white-space: pre-line;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .pedigree-box-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .ancestor-card {
+      background: var(--surface-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 11px;
+    }
+
+    .ancestor-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      margin-bottom: 8px;
+    }
+
+    .ancestor-fields {
+      display: grid;
+      grid-template-columns: 1.45fr 0.85fr;
+      gap: 8px;
+    }
+
+    .ancestor-details {
+      grid-column: 1 / -1;
+    }
+
+    .status-msg {
+      display: none;
+      margin-bottom: 14px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .status-msg.show {
+      display: block;
+    }
+
+    .status-success {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success);
+    }
+
+    .status-error {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      color: var(--danger);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-muted);
+      font-size: 0.94rem;
+    }
+
+    /* =====================================================================
+       CLASSIC EUROPEAN 4-COLUMN A4 LANDSCAPE PEDIGREE CERTIFICATE
+       - Strictly A4 Landscape: 297mm x 210mm (printable area: 287mm x 200mm)
+       - Pure white background (#ffffff), thin typography (300/400)
+       - No column header labels, no logos inside certificate
+       - Connecting bracket lines linking each generation
+       ===================================================================== */
+    .pedigree-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(5, 8, 13, 0.92);
+      overflow: auto;
+      padding: 18px;
+    }
+
+    .pedigree-modal-backdrop.open {
+      display: block;
+    }
+
+    .pedigree-controls {
+      width: 297mm;
+      min-width: 297mm;
+      margin: 0 auto 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .pedigree-sheet {
+      width: 297mm;
+      min-width: 297mm;
+      max-width: 297mm;
+      height: 210mm;
+      min-height: 210mm;
+      max-height: 210mm;
+      aspect-ratio: 297 / 210;
+      margin: 0 auto;
+      background: #ffffff;
+      color: #111827;
+      padding: 6mm 7mm;
+      border-radius: 3px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .cert-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 0.75pt solid #9ca3af;
+      padding-bottom: 3.5px;
+      margin-bottom: 5px;
+      font-weight: 300;
+      color: #111827;
+      flex-shrink: 0;
+    }
+
+    .cert-subject-headline {
+      font-size: 11.5pt;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      color: #0f172a;
+    }
+
+    .cert-loft-info {
+      font-size: 8.8pt;
+      font-weight: 300;
+      color: #374151;
+    }
+
+    .pedigree-4col {
+      display: grid;
+      grid-template-columns: 0.98fr 1.04fr 1.02fr 0.96fr;
+      gap: 0;
+      align-items: stretch;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .ped-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      padding: 0 8px;
+      min-height: 0;
+    }
+
+    .ped-col:first-child {
+      padding-left: 0;
+    }
+
+    .ped-col:last-child {
+      padding-right: 0;
+    }
+
+    .ped-col-1-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      position: relative;
+      padding: 2px 0;
+    }
+
+    .ped-col-1-wrap::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -8px;
+      width: 8px;
+      border-top: 0.75pt solid #6b7280;
+      pointer-events: none;
+    }
+
+    .ped-pair {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      position: relative;
+      padding: 1.5px 0;
+      min-height: 0;
+    }
+
+    /* Bracket linking 2 parent boxes on the left to their child on the left */
+    .ped-col:not(:first-child) .ped-pair::before {
+      content: "";
+      position: absolute;
+      top: 24%;
+      bottom: 24%;
+      left: -8px;
+      width: 8px;
+      border-top: 0.75pt solid #6b7280;
+      border-left: 0.75pt solid #6b7280;
+      border-bottom: 0.75pt solid #6b7280;
+      pointer-events: none;
+    }
+
+    /* Horizontal stem extending right from each node in cols 2 & 3 to the next generation bracket */
+    .ped-col:nth-child(2) .ped-node,
+    .ped-col:nth-child(3) .ped-node {
+      position: relative;
+    }
+
+    .ped-col:nth-child(2) .ped-node::after,
+    .ped-col:nth-child(3) .ped-node::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -8px;
+      width: 8px;
+      border-top: 0.75pt solid #6b7280;
+      pointer-events: none;
+    }
+
+    .ped-node {
+      flex: 1;
+      background: #ffffff;
+      color: #111827;
+      border: 0.65pt solid #9ca3af;
+      border-radius: 0;
+      padding: 3.5px 6px;
+      margin: 1.5px 0;
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .ped-col:first-child .ped-node {
+      flex: 0 1 auto;
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 8px 9px;
+      border: 0.75pt solid #6b7280;
+    }
+
+    .ped-node-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 4px;
+      border-bottom: 0.5pt solid #d1d5db;
+      padding-bottom: 1.5px;
+      margin-bottom: 2.5px;
+    }
+
+    .ped-ring {
+      font-size: 8.3pt;
+      font-weight: 400;
+      color: #0f172a;
+      line-height: 1.18;
+      word-break: break-word;
+    }
+
+    .ped-col:first-child .ped-ring {
+      font-size: 10pt;
+    }
+
+    .ped-symbol {
+      font-size: 8.4pt;
+      font-weight: 400;
+      color: #374151;
+      flex-shrink: 0;
+    }
+
+    .ped-title {
+      font-size: 7.5pt;
+      font-weight: 400;
+      color: #1e293b;
+      line-height: 1.18;
+      word-break: break-word;
+    }
+
+    .ped-sub {
+      font-size: 6.9pt;
+      font-weight: 300;
+      color: #334155;
+      line-height: 1.18;
+      margin-top: 2px;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    .loft-contact-block {
+      margin-top: 8px;
+      padding: 6px 8px;
+      border-top: 0.65pt solid #9ca3af;
+      font-size: 7.8pt;
+      font-weight: 300;
+      color: #1f2937;
+      line-height: 1.35;
+    }
+
+    .loft-contact-block strong {
+      font-weight: 400;
+      color: #0f172a;
+    }
+
+    /* =====================================================================
+       STRICT A4 LANDSCAPE PRINT RULES (297mm x 210mm, 5mm margin -> 287x200)
+       ===================================================================== */
+    @page {
+      size: A4 landscape;
+      margin: 5mm;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html,
+      body {
+        width: 287mm;
+        height: 200mm;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        overflow: hidden !important;
+      }
+
+      .app-header,
+      .main-container,
+      .pedigree-controls,
+      .status-msg {
+        display: none !important;
+      }
+
+      .pedigree-modal-backdrop {
+        display: block !important;
+        position: static !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+      }
+
+      .pedigree-sheet {
+        width: 287mm !important;
+        min-width: 287mm !important;
+        max-width: 287mm !important;
+        height: 200mm !important;
+        min-height: 200mm !important;
+        max-height: 200mm !important;
+        aspect-ratio: 297 / 210 !important;
+        margin: 0 !important;
+        padding: 3mm 4mm !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      .cert-header {
+        padding-bottom: 2.5px;
+        margin-bottom: 4px;
+      }
+
+      .cert-subject-headline {
+        font-size: 10.5pt;
+        font-weight: 400;
+      }
+
+      .cert-loft-info {
+        font-size: 8.2pt;
+        font-weight: 300;
+      }
+
+      .pedigree-4col {
+        height: calc(100% - 26px);
+      }
+
+      .ped-node {
+        padding: 2.5px 5px;
+        margin: 1.2px 0;
+        border: 0.6pt solid #9ca3af;
+      }
+
+      .ped-col:first-child .ped-node {
+        padding: 6px 7px;
+      }
+
+      .ped-ring {
+        font-size: 7.8pt;
+      }
+
+      .ped-col:first-child .ped-ring {
+        font-size: 9.4pt;
+      }
+
+      .ped-title {
+        font-size: 7pt;
+      }
+
+      .ped-sub {
+        font-size: 6.4pt;
+        line-height: 1.14;
+      }
+
+      .loft-contact-block {
+        padding: 4px 6px;
+        font-size: 7.3pt;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div>
+        <div class="brand-title">Loft Mahmoud Awed</div>
+        <div class="brand-subtitle">Tanta &bull; 01069696229</div>
+      </div>
+      <nav class="nav-tabs" aria-label="Main navigation">
+        <button type="button" class="nav-btn active" data-tab="offspring" onclick="switchTab('offspring')">Offspring</button>
+        <button type="button" class="nav-btn" data-tab="parents" onclick="switchTab('parents')">Parents</button>
+        <button type="button" class="nav-btn" data-tab="add" onclick="switchTab('add')">Add</button>
+        <button type="button" class="nav-btn" data-tab="backup" onclick="switchTab('backup')">Backup</button>
+      </nav>
+    </div>
+  </header>
 
-    <header>
-        <div class="top-wrap">
-            <div class="brand">
-                <span>Loft Mahmoud Awed</span>
-            </div>
-            <nav id="mainNav">
-                <button type="button" class="nav-btn active" data-tab="offspring">Offspring</button>
-                <button type="button" class="nav-btn" data-tab="parents">Parents</button>
-                <button type="button" class="nav-btn" data-tab="add">+ Add</button>
-                <button type="button" class="nav-btn" data-tab="backup">Backup</button>
-            </nav>
+  <main class="main-container">
+    <div id="statusBanner" class="status-msg" role="status" aria-live="polite"></div>
+
+    <!-- OFFSPRING TAB (DEFAULT) -->
+    <section id="tab-offspring" class="tab-panel">
+      <div class="card">
+        <div class="section-header">
+          <h1 class="section-title">Offspring Records</h1>
+          <span id="offspringCount" class="section-meta">0 birds</span>
         </div>
-    </header>
-
-    <main>
-        <!-- 1. Offspring Tab (Default Home: Search & Bird Count Only) -->
-        <section id="tab-offspring" class="view">
-            <div class="toolbar">
-                <div class="search-row">
-                    <input type="text" id="searchOffspring" class="input" placeholder="Search ring number or year...">
-                    <div id="countOffspring" class="count-badge">0 Birds</div>
-                </div>
-            </div>
-            <div id="listOffspring" class="cards-list"></div>
-        </section>
-
-        <!-- 2. Parents Tab (Males [default active] & Females filter buttons ONLY, plus search & count) -->
-        <section id="tab-parents" class="view hidden">
-            <div class="toolbar">
-                <div class="search-row">
-                    <input type="text" id="searchParents" class="input" placeholder="Search ring number or year...">
-                </div>
-                <div class="filter-row">
-                    <div class="pills" id="filterParents">
-                        <button type="button" class="pill-btn active" data-gender="M">Males</button>
-                        <button type="button" class="pill-btn" data-gender="F">Females</button>
-                    </div>
-                    <div id="countParents" class="count-badge">0 Birds</div>
-                </div>
-            </div>
-            <div id="listParents" class="cards-list"></div>
-        </section>
-
-        <!-- 3. + Add / Edit Form Tab (Defaults to Offspring mode) -->
-        <section id="tab-add" class="view hidden">
-            <form id="birdForm" class="panel">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <strong id="formTitle" style="font-size:1.06rem; color:var(--gold-bright);">Add New Bird</strong>
-                    <button type="button" id="cancelTopBtn" class="btn btn-ghost hidden">Cancel</button>
-                </div>
-                <input type="hidden" id="editId">
-
-                <div>
-                    <label class="lbl">Category</label>
-                    <div class="cat-switch">
-                        <label>
-                            <input type="radio" name="cat" value="offspring" checked>
-                            <span>Offspring</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="cat" value="parent">
-                            <span>Parent</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="lbl" for="genderInput">Gender</label>
-                    <select id="genderInput" class="select">
-                        <option value="M">Male ♂</option>
-                        <option value="F">Female ♀</option>
-                    </select>
-                </div>
-
-                <!-- Bird Itself -->
-                <div class="lin-card subject-card">
-                    <div class="lin-card-head">
-                        <span>Bird Information</span>
-                        <span class="lin-badge">Subject</span>
-                    </div>
-                    <div class="grid-ring-year">
-                        <div>
-                            <label class="lbl" for="ringInput">Ring Number *</label>
-                            <input type="text" id="ringInput" class="input" required placeholder="e.g. EG 26-101">
-                        </div>
-                        <div>
-                            <label class="lbl" for="yearInput">Year *</label>
-                            <input type="number" id="yearInput" class="input" required min="1980" max="2099" placeholder="2026">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="lbl" for="notesInput">Details</label>
-                        <textarea id="notesInput" class="textarea" rows="2" placeholder="Line, race results, or bird details"></textarea>
-                    </div>
-                </div>
-
-                <!-- OFFSPRING MODE: Sire Ring Number, Dam Ring Number & Details -->
-                <div id="offspringParentsSection" class="grid-2">
-                    <div>
-                        <label class="lbl" for="offSireInput">Sire Ring Number</label>
-                        <input type="text" id="offSireInput" list="birdsDatalist" class="input" placeholder="Select or type father ring">
-                    </div>
-                    <div>
-                        <label class="lbl" for="offDamInput">Dam Ring Number</label>
-                        <input type="text" id="offDamInput" list="birdsDatalist" class="input" placeholder="Select or type mother ring">
-                    </div>
-                </div>
-                <datalist id="birdsDatalist"></datalist>
-
-                <!-- PARENT MODE: Sire, Dam, 4 Grandparents, 8 Great-Grandparents -->
-                <div id="parentLineageSection" class="lineage-stack hidden">
-                    <div class="gen-divider">
-                        <span>Parents (Sire &amp; Dam)</span>
-                        <small>Ring Number, Year &amp; Details</small>
-                    </div>
-                    <div class="gp-grid">
-                        <!-- Sire -->
-                        <div class="lin-card sire-card">
-                            <div class="lin-card-head">
-                                <span>Sire ♂</span>
-                                <div style="display:flex; align-items:center; gap:5px;">
-                                    <button type="button" id="quickFillSireBtn" class="quick-fill-btn hidden">Auto-Fill from Loft</button>
-                                    <span class="lin-badge">Sire</span>
-                                </div>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="sireRingInput">Ring Number</label>
-                                    <input type="text" id="sireRingInput" list="birdsDatalist" class="input input-sm" placeholder="Sire ring">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="sireYearInput">Year</label>
-                                    <input type="number" id="sireYearInput" class="input input-sm" min="1980" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="sireDetailsInput">Details</label>
-                                <input type="text" id="sireDetailsInput" class="input input-sm" placeholder="Sire details">
-                            </div>
-                        </div>
-
-                        <!-- Dam -->
-                        <div class="lin-card dam-card">
-                            <div class="lin-card-head">
-                                <span>Dam ♀</span>
-                                <div style="display:flex; align-items:center; gap:5px;">
-                                    <button type="button" id="quickFillDamBtn" class="quick-fill-btn hidden">Auto-Fill from Loft</button>
-                                    <span class="lin-badge">Dam</span>
-                                </div>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="damRingInput">Ring Number</label>
-                                    <input type="text" id="damRingInput" list="birdsDatalist" class="input input-sm" placeholder="Dam ring">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="damYearInput">Year</label>
-                                    <input type="number" id="damYearInput" class="input input-sm" min="1980" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="damDetailsInput">Details</label>
-                                <input type="text" id="damDetailsInput" class="input input-sm" placeholder="Dam details">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4 Grandparents -->
-                    <div class="gen-divider">
-                        <span>4 Grandparents</span>
-                        <small>Ring Number, Year &amp; Details</small>
-                    </div>
-                    <div class="gp-grid">
-                        <div class="lin-card sire-card">
-                            <div class="lin-card-head">
-                                <span>Paternal Grandfather ♂</span>
-                                <span class="lin-badge">PGF</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_ff_ring">Ring Number</label>
-                                    <input type="text" id="gp_ff_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_ff_year">Year</label>
-                                    <input type="number" id="gp_ff_year" class="input input-sm" min="1970" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_ff_details">Details</label>
-                                <input type="text" id="gp_ff_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card sire-card">
-                            <div class="lin-card-head">
-                                <span>Paternal Grandmother ♀</span>
-                                <span class="lin-badge">PGM</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_fm_ring">Ring Number</label>
-                                    <input type="text" id="gp_fm_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_fm_year">Year</label>
-                                    <input type="number" id="gp_fm_year" class="input input-sm" min="1970" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_fm_details">Details</label>
-                                <input type="text" id="gp_fm_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card dam-card">
-                            <div class="lin-card-head">
-                                <span>Maternal Grandfather ♂</span>
-                                <span class="lin-badge">MGF</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_mf_ring">Ring Number</label>
-                                    <input type="text" id="gp_mf_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_mf_year">Year</label>
-                                    <input type="number" id="gp_mf_year" class="input input-sm" min="1970" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_mf_details">Details</label>
-                                <input type="text" id="gp_mf_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card dam-card">
-                            <div class="lin-card-head">
-                                <span>Maternal Grandmother ♀</span>
-                                <span class="lin-badge">MGM</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_mm_ring">Ring Number</label>
-                                    <input type="text" id="gp_mm_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_mm_year">Year</label>
-                                    <input type="number" id="gp_mm_year" class="input input-sm" min="1970" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_mm_details">Details</label>
-                                <input type="text" id="gp_mm_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 8 Great-Grandparents -->
-                    <div class="gen-divider">
-                        <span>8 Great-Grandparents</span>
-                        <small>Ring Number, Year &amp; Details</small>
-                    </div>
-                    <div class="gp-grid">
-                        <div class="lin-card sire-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 1 ♂</span>
-                                <span class="lin-badge">GGP 1</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_fff_ring">Ring Number</label>
-                                    <input type="text" id="gp_fff_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_fff_year">Year</label>
-                                    <input type="number" id="gp_fff_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_fff_details">Details</label>
-                                <input type="text" id="gp_fff_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card sire-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 2 ♀</span>
-                                <span class="lin-badge">GGP 2</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_ffm_ring">Ring Number</label>
-                                    <input type="text" id="gp_ffm_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_ffm_year">Year</label>
-                                    <input type="number" id="gp_ffm_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_ffm_details">Details</label>
-                                <input type="text" id="gp_ffm_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card sire-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 3 ♂</span>
-                                <span class="lin-badge">GGP 3</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_fmf_ring">Ring Number</label>
-                                    <input type="text" id="gp_fmf_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_fmf_year">Year</label>
-                                    <input type="number" id="gp_fmf_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_fmf_details">Details</label>
-                                <input type="text" id="gp_fmf_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card sire-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 4 ♀</span>
-                                <span class="lin-badge">GGP 4</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_fmm_ring">Ring Number</label>
-                                    <input type="text" id="gp_fmm_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_fmm_year">Year</label>
-                                    <input type="number" id="gp_fmm_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_fmm_details">Details</label>
-                                <input type="text" id="gp_fmm_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card dam-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 5 ♂</span>
-                                <span class="lin-badge">GGP 5</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_mff_ring">Ring Number</label>
-                                    <input type="text" id="gp_mff_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_mff_year">Year</label>
-                                    <input type="number" id="gp_mff_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_mff_details">Details</label>
-                                <input type="text" id="gp_mff_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card dam-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 6 ♀</span>
-                                <span class="lin-badge">GGP 6</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_mfm_ring">Ring Number</label>
-                                    <input type="text" id="gp_mfm_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_mfm_year">Year</label>
-                                    <input type="number" id="gp_mfm_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_mfm_details">Details</label>
-                                <input type="text" id="gp_mfm_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card dam-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 7 ♂</span>
-                                <span class="lin-badge">GGP 7</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_mmf_ring">Ring Number</label>
-                                    <input type="text" id="gp_mmf_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_mmf_year">Year</label>
-                                    <input type="number" id="gp_mmf_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_mmf_details">Details</label>
-                                <input type="text" id="gp_mmf_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-
-                        <div class="lin-card dam-card">
-                            <div class="lin-card-head">
-                                <span>Great-Grandparent 8 ♀</span>
-                                <span class="lin-badge">GGP 8</span>
-                            </div>
-                            <div class="grid-ring-year">
-                                <div>
-                                    <label class="lbl-xs" for="gp_mmm_ring">Ring Number</label>
-                                    <input type="text" id="gp_mmm_ring" list="birdsDatalist" class="input input-sm" placeholder="Ring no.">
-                                </div>
-                                <div>
-                                    <label class="lbl-xs" for="gp_mmm_year">Year</label>
-                                    <input type="number" id="gp_mmm_year" class="input input-sm" min="1960" max="2099" placeholder="Year">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="lbl-xs" for="gp_mmm_details">Details</label>
-                                <input type="text" id="gp_mmm_details" class="input input-sm" placeholder="Details">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-2" style="margin-top:4px;">
-                    <button type="submit" id="submitBtn" class="btn btn-gold btn-lg">Save Bird</button>
-                    <button type="button" id="cancelBottomBtn" class="btn btn-ghost btn-lg">Cancel</button>
-                </div>
-            </form>
-        </section>
-
-        <!-- 4. Backup Tab -->
-        <section id="tab-backup" class="view hidden">
-            <div class="panel">
-                <div>
-                    <strong style="font-size:1.06rem; color:var(--gold-bright); display:block; margin-bottom:4px;">Backup &amp; Data Management</strong>
-                    <p style="font-size:0.84rem; color:var(--text-muted);">Data is stored locally in your browser. Export a JSON backup regularly to safeguard your loft records offline.</p>
-                </div>
-                <button type="button" id="exportJsonBtn" class="btn btn-gold btn-lg">Export JSON Backup</button>
-                <button type="button" id="exportCsvBtn" class="btn btn-slate btn-lg">Export CSV</button>
-                <label class="btn btn-ghost btn-lg" style="text-align:center; cursor:pointer; display:block;">
-                    Import JSON Backup
-                    <input type="file" id="importJsonInput" accept=".json,application/json" class="hidden">
-                </label>
-                <button type="button" id="clearAllBtn" class="btn btn-danger btn-lg" style="margin-top:6px;">Clear All Data</button>
-            </div>
-        </section>
-    </main>
-
-    <!-- Pedigree Modal -->
-    <div id="pedModal" class="modal-bg hidden">
-        <div class="ped-box">
-            <div class="ped-bar">
-                <strong style="font-size:0.9rem; font-weight:500; color:var(--gold-bright);">Pedigree Certificate</strong>
-                <div style="display:flex; gap:6px;">
-                    <button type="button" id="printPedBtn" class="btn btn-gold">Print / PDF</button>
-                    <button type="button" id="closePedBtn" class="btn btn-ghost">Close</button>
-                </div>
-            </div>
-            <div class="ped-scroll">
-                <div id="pedSheet" class="ped-sheet"></div>
-            </div>
+        <div class="toolbar">
+          <input type="search" id="offspringSearch" class="search-input" placeholder="Search ring, year, sire, dam, notes..." oninput="renderOffspring()" />
+          <select id="offspringGenderFilter" class="filter-select" onchange="renderOffspring()">
+            <option value="all">All Genders</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <button type="button" class="btn btn-gold" onclick="openAddOffspring()">+ Add Offspring</button>
         </div>
+        <div id="offspringList" class="bird-grid"></div>
+      </div>
+    </section>
+
+    <!-- PARENTS TAB -->
+    <section id="tab-parents" class="tab-panel" style="display:none;">
+      <div class="card">
+        <div class="section-header">
+          <h2 class="section-title">Breeding Parents &amp; Lineages</h2>
+          <span id="parentsCount" class="section-meta">0 lineages</span>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="parentsSearch" class="search-input" placeholder="Search ring, year, details..." oninput="renderParents()" />
+          <button type="button" class="btn btn-gold" onclick="openAddParent()">+ Add Parent Lineage</button>
+        </div>
+        <div id="parentsList" class="bird-grid"></div>
+      </div>
+    </section>
+
+    <!-- ADD / EDIT TAB -->
+    <section id="tab-add" class="tab-panel" style="display:none;">
+      <div class="card">
+        <div class="section-header">
+          <h2 id="formHeading" class="section-title">Add New Record</h2>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" id="modeOffspringBtn" class="btn btn-gold" onclick="setFormMode('offspring')">Offspring Entry</button>
+            <button type="button" id="modeParentBtn" class="btn" onclick="setFormMode('parent')">Parent Lineage Entry</button>
+          </div>
+        </div>
+
+        <form id="birdForm" onsubmit="saveRecord(event)">
+          <input type="hidden" id="editId" value="" />
+          <input type="hidden" id="recordType" value="offspring" />
+
+          <!-- Offspring Entry Form -->
+          <div id="offspringFields">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="ringNumber">Ring Number *</label>
+                <input type="text" id="ringNumber" required placeholder="e.g. EGY-2026-104" />
+              </div>
+              <div class="form-group">
+                <label for="birdYear">Year *</label>
+                <input type="text" id="birdYear" required placeholder="e.g. 2026" />
+              </div>
+              <div class="form-group">
+                <label for="birdGender">Gender *</label>
+                <select id="birdGender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sireSelect">Sire (Father)</label>
+                <select id="sireSelect">
+                  <option value="">-- Select Sire --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="damSelect">Dam (Mother)</label>
+                <select id="damSelect">
+                  <option value="">-- Select Dam --</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:14px;">
+              <label for="birdNotes">Notes</label>
+              <textarea id="birdNotes" placeholder="Race results, color, eye sign, training notes..."></textarea>
+            </div>
+          </div>
+
+          <!-- Parent Lineage Entry Form (15 Ancestor Slots) -->
+          <div id="parentLineageFields" style="display:none;">
+            <div id="lineageCardsContainer" class="pedigree-box-grid"></div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+            <button type="submit" class="btn btn-gold">Save Record</button>
+            <button type="button" class="btn" onclick="resetForm()">Clear Form</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- BACKUP TAB -->
+    <section id="tab-backup" class="tab-panel" style="display:none;">
+      <div class="card">
+        <div class="section-header">
+          <h2 class="section-title">Backup &amp; Restore</h2>
+          <span class="section-meta">LocalStorage Offline Persistence</span>
+        </div>
+        <p class="bird-line" style="margin-bottom:14px;">
+          All records are stored locally in this browser (<strong>localStorage</strong>) and work offline once loaded. Export a JSON or CSV backup regularly.
+        </p>
+        <div class="toolbar" style="margin-bottom:0;">
+          <button type="button" class="btn btn-gold" onclick="exportJSON()">Export JSON</button>
+          <button type="button" class="btn" onclick="exportCSV()">Export CSV</button>
+          <label class="btn" style="cursor:pointer;">
+            Import JSON
+            <input type="file" id="jsonImportInput" accept=".json,application/json" style="display:none;" onchange="importJSON(event)" />
+          </label>
+          <button type="button" class="btn" onclick="loadSampleData(true)">Load Sample Data</button>
+          <button type="button" class="btn btn-danger" onclick="clearAllData()">Clear Data</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PURE WHITE 4-COLUMN A4 LANDSCAPE PEDIGREE MODAL -->
+  <div id="pedigreeModal" class="pedigree-modal-backdrop" onclick="handleBackdropClick(event)">
+    <div class="pedigree-controls">
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="btn btn-gold" onclick="window.print()">Print / Save PDF (A4 Landscape)</button>
+        <button type="button" class="btn" onclick="closePedigree()">Close</button>
+      </div>
+      <span class="section-meta">A4 Landscape (297mm &times; 210mm)</span>
     </div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmModal" class="modal-bg hidden">
-        <div class="confirm-card">
-            <p id="confirmText" style="font-weight:700; font-size:0.94rem; margin-bottom:18px; color:var(--text-primary);"></p>
-            <div class="grid-2">
-                <button type="button" id="confirmYesBtn" class="btn btn-danger">Confirm</button>
-                <button type="button" id="confirmNoBtn" class="btn btn-ghost">Cancel</button>
-            </div>
-        </div>
+    <div id="pedigreeSheet" class="pedigree-sheet">
+      <div class="cert-header">
+        <span id="certHeadline" class="cert-subject-headline">Loft Mahmoud Awed</span>
+        <span class="cert-loft-info">Loft Mahmoud Awed &bull; Tanta &bull; 01069696229</span>
+      </div>
+      <div id="pedigreeGrid" class="pedigree-4col"></div>
     </div>
+  </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast hidden"></div>
+  <script>
+    const STORAGE_KEY = 'loft_mahmoud_awed_v1';
 
-    <script>
-        (function () {
-            'use strict';
+    // 1 Subject + 2 Parents + 4 Grandparents + 8 Great-Grandparents = 15 lineage slots
+    const LINEAGE_SLOTS = [
+      { key: 'self', label: 'Subject Bird' },
+      { key: 'sire', label: 'Sire (Father)' },
+      { key: 'dam', label: 'Dam (Mother)' },
+      { key: 'pgs', label: 'Paternal Grand-Sire' },
+      { key: 'pgd', label: 'Paternal Grand-Dam' },
+      { key: 'mgs', label: 'Maternal Grand-Sire' },
+      { key: 'mgd', label: 'Maternal Grand-Dam' },
+      { key: 'pggs', label: 'P.G.G. Sire (1)' },
+      { key: 'pggd', label: 'P.G.G. Dam (2)' },
+      { key: 'pgms', label: 'P.G.M. Sire (3)' },
+      { key: 'pgmd', label: 'P.G.M. Dam (4)' },
+      { key: 'mggs', label: 'M.G.G. Sire (5)' },
+      { key: 'mggd', label: 'M.G.G. Dam (6)' },
+      { key: 'mgms', label: 'M.G.M. Sire (7)' },
+      { key: 'mgmd', label: 'M.G.M. Dam (8)' }
+    ];
 
-            const DB_KEY = 'loft_mahmoud_awed_records_v1';
-            const INIT_KEY = 'loft_mahmoud_awed_seeded_v1';
-            const ANCESTOR_KEYS = [
-                'f', 'm',
-                'ff', 'fm', 'mf', 'mm',
-                'fff', 'ffm', 'fmf', 'fmm', 'mff', 'mfm', 'mmf', 'mmm'
-            ];
+    let state = {
+      offspring: [],
+      parents: []
+    };
 
-            const SAMPLE_BIRDS = [
-                {
-                    id: 'sample-off-1',
-                    category: 'offspring',
-                    ring: 'EG 26-801',
-                    year: '2026',
-                    gender: 'M',
-                    sire: 'EG 22-305',
-                    dam: 'EG 23-418',
-                    notes: 'First round cock - alert & balanced',
-                    ancestors: {}
-                },
-                {
-                    id: 'sample-off-2',
-                    category: 'offspring',
-                    ring: 'EG 26-802',
-                    year: '2026',
-                    gender: 'F',
-                    sire: 'EG 22-305',
-                    dam: 'EG 23-418',
-                    notes: 'First round hen',
-                    ancestors: {}
-                },
-                {
-                    id: 'sample-par-m',
-                    category: 'parent',
-                    ring: 'EG 22-305',
-                    year: '2022',
-                    gender: 'M',
-                    sire: 'BELG 19-6044112',
-                    dam: 'NL 20-1274810',
-                    notes: '1st Ace Pigeon 400 km - Direct bloodline',
-                    ancestors: {
-                        f: { ring: 'BELG 19-6044112', year: '2019', details: 'Son Olympic Boy - 3x 1st Prize' },
-                        m: { ring: 'NL 20-1274810', year: '2020', details: 'Daughter Golden Prince - Top breeder' },
-                        ff: { ring: 'BELG 16-6100234', year: '2016', details: 'Olympic Boy - Ace lines' },
-                        fm: { ring: 'BELG 17-6211908', year: '2017', details: 'Blue Pearl - Direct hen' },
-                        mf: { ring: 'NL 17-5102931', year: '2017', details: 'Golden Prince - 1st NPO' },
-                        mm: { ring: 'NL 18-5199044', year: '2018', details: 'Miss Blois - 2nd Nat.' },
-                        fff: { ring: 'BELG 12-6011220', year: '2012', details: 'De Jan - Base cock' },
-                        ffm: { ring: 'BELG 13-6044891', year: '2013', details: 'Olympic Queen' },
-                        fmf: { ring: 'BELG 14-6129004', year: '2014', details: 'Bolt Line 004' },
-                        fmm: { ring: 'BELG 15-6099123', year: '2015', details: 'Nieuwe Rossi Hen' },
-                        mff: { ring: 'NL 14-1044921', year: '2014', details: 'Harry Son 921' },
-                        mfm: { ring: 'NL 15-1088744', year: '2015', details: 'Ceesje' },
-                        mmf: { ring: 'NL 15-1120399', year: '2015', details: 'Super Blois' },
-                        mmm: { ring: 'NL 16-1190422', year: '2016', details: 'Beauty 422' }
-                    }
-                },
-                {
-                    id: 'sample-par-f',
-                    category: 'parent',
-                    ring: 'EG 23-418',
-                    year: '2023',
-                    gender: 'F',
-                    sire: 'BELG 20-4120988',
-                    dam: 'BELG 21-4120911',
-                    notes: 'Proven breeding hen - Tanta loft',
-                    ancestors: {
-                        f: { ring: 'BELG 20-4120988', year: '2020', details: 'Super Cock - Sire of winners' },
-                        m: { ring: 'BELG 21-4120911', year: '2021', details: 'Queen Argenton - 1st Prov.' },
-                        ff: { ring: 'BELG 17-4091120', year: '2017', details: 'Mr. Sezagie Line' },
-                        fm: { ring: 'BELG 18-4100877', year: '2018', details: 'Beauty Hen' },
-                        mf: { ring: 'BELG 18-4011223', year: '2018', details: 'Fast Blue - 5x Top 10' },
-                        mm: { ring: 'BELG 19-4055910', year: '2019', details: 'Little Diamond' },
-                        fff: { ring: 'BELG 14-3450718', year: '2014', details: 'Mr. Sezagie' },
-                        ffm: { ring: 'BELG 15-4019921', year: '2015', details: 'Late Schoonheid' },
-                        fmf: { ring: 'BELG 15-4022810', year: '2015', details: 'Zoon Superior' },
-                        fmm: { ring: 'BELG 16-4088122', year: '2016', details: 'Miss Boucre' },
-                        mff: { ring: 'BELG 15-3011902', year: '2015', details: 'Asduif 902' },
-                        mfm: { ring: 'BELG 16-3099114', year: '2016', details: 'Dam Praathuis' },
-                        mmf: { ring: 'BELG 16-3120944', year: '2016', details: 'Blue Flash' },
-                        mmm: { ring: 'BELG 17-3188420', year: '2017', details: 'Miss Cacharel' }
-                    }
-                }
-            ];
+    function createEmptyLineage() {
+      const obj = {};
+      for (const s of LINEAGE_SLOTS) {
+        obj[s.key] = { ring: '', year: '', details: '' };
+      }
+      return obj;
+    }
 
-            let fallbackMemory = {};
-            let birds = [];
-            let activeTab = 'offspring';
-            let parentGenderFilter = 'M';
-            let pendingConfirmFn = null;
-            let toastTimeout = null;
-
-            function readStorage(key) {
-                try {
-                    return window.localStorage.getItem(key);
-                } catch (e) {
-                    return Object.prototype.hasOwnProperty.call(fallbackMemory, key) ? fallbackMemory[key] : null;
-                }
+    function createSampleDataset() {
+      return {
+        parents: [
+          {
+            id: 'par_sample_sire_1',
+            lineage: {
+              self: {
+                ring: 'EGY-2021-502',
+                year: '2021',
+                details: 'Son Olympic Blue | Janssen • De Rauw\nBlue Bar\n1st Club 240km Tanta\n2nd District 310km\nSire of 3 Club Winners'
+              },
+              sire: {
+                ring: 'BELG-2017-6120419',
+                year: '2017',
+                details: 'Olympic Bear | De Rauw-Sablon\nBlue Bar\n1st Ace Middle Distance 2018\n3x 1st Prize Winner'
+              },
+              dam: {
+                ring: 'NL-2018-1940288',
+                year: '2018',
+                details: 'Beauty Boucre | Koopman • Van Loon\nBlue Check\n1st Ace Loft Hen 2019\nDam of Olympiad Hopeful'
+              },
+              pgs: {
+                ring: 'BELG-2013-4081210',
+                year: '2013',
+                details: 'Mr Sezagie | De Rauw-Sablon\nBlue Check\nNational Top 15 520km'
+              },
+              pgd: {
+                ring: 'BELG-2014-4190332',
+                year: '2014',
+                details: 'Late Schoonheid | Rik Hermans\nBlue Bar\nDam of 4 First Prize Winners'
+              },
+              mgs: {
+                ring: 'NL-2014-5108841',
+                year: '2014',
+                details: 'Zoon Superior | Koopman\nMealy\n1st 180km • 3rd 280km'
+              },
+              mgd: {
+                ring: 'NL-2015-1402917',
+                year: '2015',
+                details: 'Miss Boucre | Van Loon\nBlue Check\n1st Provincial 410km'
+              },
+              pggs: { ring: 'BELG-2009-2019412', year: '2009', details: 'Blue Bar | Foundation Sire\n1st National Ace Line' },
+              pggd: { ring: 'BELG-2010-2190844', year: '2010', details: 'Blue Check | Foundation Dam\nSuper Breeding Hen' },
+              pgms: { ring: 'BELG-2010-3091125', year: '2010', details: 'Dark Check | Marathon Line\nTop 10 Long Distance' },
+              pgmd: { ring: 'BELG-2011-3184029', year: '2011', details: 'Blue Bar | Ace Hen Line\nProven Stock Dam' },
+              mggs: { ring: 'NL-2010-1209384', year: '2010', details: 'Mealy | Sprinter Line\n6x 1st Club Winner' },
+              mggd: { ring: 'NL-2011-1384720', year: '2011', details: 'Blue | Proven Dam\nDirect Kleine Dirk Line' },
+              mgms: { ring: 'NL-2011-1592830', year: '2011', details: 'Blue Check | Stock Sire\nGrandson Golden Lady' },
+              mgmd: { ring: 'NL-2012-1604921', year: '2012', details: 'Blue Bar | Loft Hen\nDam of 2 Ace Pigeons' }
             }
-
-            function writeStorage(key, val) {
-                try {
-                    window.localStorage.setItem(key, val);
-                } catch (e) {
-                    fallbackMemory[key] = val;
-                }
+          },
+          {
+            id: 'par_sample_dam_1',
+            lineage: {
+              self: {
+                ring: 'EGY-2022-714',
+                year: '2022',
+                details: 'Blauwe Argenton | Heremans-Ceusters\nBlue Check\n1st Loft Youngster 2022\n2nd Club 200km • 4th 350km'
+              },
+              sire: {
+                ring: 'DV-2018-08419-24',
+                year: '2018',
+                details: 'Asduif 8419 | Euro Diamond\nBlue Check\n1st Ace Pigeon 2019\n22 Prizes in First 10%'
+              },
+              dam: {
+                ring: 'EGY-2019-208',
+                year: '2019',
+                details: 'Miss Tanta | Tanta Loft Champion\nBlue Bar\n1st 260km • 2nd 350km\nSuper Breeding Hen'
+              },
+              pgs: {
+                ring: 'DV-2014-04129-11',
+                year: '2014',
+                details: 'Genaaide 4129 | Heremans\nBlue Bar\n18 Prizes in 2 Seasons'
+              },
+              pgd: {
+                ring: 'DV-2015-09102-67',
+                year: '2015',
+                details: 'Lief Duifke | De Klak\nBlue Check\nDirect Stock Daughter'
+              },
+              mgs: {
+                ring: 'EGY-2015-063',
+                year: '2015',
+                details: 'Blue Flash | Delta Ace Sire\nBlue Check\nConsistent Distance Cock'
+              },
+              mgd: {
+                ring: 'EGY-2016-119',
+                year: '2016',
+                details: 'Miss Cacharel | Proven Hen\nBlue Bar\nDam of Club Winners'
+              },
+              pggs: { ring: 'DV-2010-01234-05', year: '2010', details: 'Blue Check | Olympiade 003 Line\nTop Sprint Sire' },
+              pggd: { ring: 'DV-2011-05678-19', year: '2011', details: 'Blue Bar | Top Dam\nDaughter Jan' },
+              pgms: { ring: 'DV-2011-07890-42', year: '2011', details: 'Blue Check | Speed Line\n1st Regional 290km' },
+              pgmd: { ring: 'DV-2012-09876-88', year: '2012', details: 'Blue | Stock Hen\nFoundation Breeder' },
+              mggs: { ring: 'EGY-2011-019', year: '2011', details: 'Blue Check | Nile Ace\n1st 420km Assiut' },
+              mggd: { ring: 'EGY-2012-045', year: '2012', details: 'Blue Bar | Loft Dam\nProven Breeding Hen' },
+              mgms: { ring: 'EGY-2012-081', year: '2012', details: 'Blue Check | Distance Sire\nTop 5 National' },
+              mgmd: { ring: 'EGY-2013-097', year: '2013', details: 'Blue Bar | Stock Hen\nMother of Winners' }
             }
-
-            function sanitizeAncestors(rawAnc) {
-                const result = {};
-                if (!rawAnc || typeof rawAnc !== 'object') return result;
-                ANCESTOR_KEYS.forEach(k => {
-                    const entry = rawAnc[k];
-                    if (entry && typeof entry === 'object') {
-                        const ring = String(entry.ring || '').trim();
-                        const year = String(entry.year || '').trim();
-                        const details = String(entry.details || '').trim();
-                        if (ring || year || details) {
-                            result[k] = { ring, year, details };
-                        }
-                    }
-                });
-                return result;
-            }
-
-            function loadData() {
-                const raw = readStorage(DB_KEY);
-                const seeded = readStorage(INIT_KEY);
-
-                if (raw !== null) {
-                    try {
-                        const parsed = JSON.parse(raw);
-                        if (Array.isArray(parsed)) {
-                            birds = parsed.map(b => ({
-                                ...b,
-                                ancestors: sanitizeAncestors(b.ancestors)
-                            }));
-                            return;
-                        }
-                    } catch (e) {
-                        birds = [];
-                    }
-                }
-
-                if (!seeded) {
-                    birds = SAMPLE_BIRDS.map(b => ({
-                        ...b,
-                        ancestors: sanitizeAncestors(b.ancestors)
-                    }));
-                    writeStorage(INIT_KEY, '1');
-                    saveData();
-                } else {
-                    birds = [];
-                }
-            }
-
-            function saveData() {
-                writeStorage(DB_KEY, JSON.stringify(birds));
-                refreshDatalist();
-            }
-
-            function esc(str) {
-                return String(str || '')
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#39;');
-            }
-
-            function normRing(ring) {
-                return String(ring || '').trim().toLowerCase();
-            }
-
-            function findByRing(ring) {
-                const target = normRing(ring);
-                if (!target) return null;
-                return birds.find(b => normRing(b.ring) === target) || null;
-            }
-
-            function findById(id) {
-                return birds.find(b => b.id === id) || null;
-            }
-
-            function showToast(msg) {
-                const el = document.getElementById('toast');
-                el.textContent = msg;
-                el.classList.remove('hidden');
-                if (toastTimeout) clearTimeout(toastTimeout);
-                toastTimeout = setTimeout(() => {
-                    el.classList.add('hidden');
-                }, 2600);
-            }
-
-            function refreshDatalist() {
-                const dl = document.getElementById('birdsDatalist');
-                dl.innerHTML = birds
-                    .map(b => `<option value="${esc(b.ring)}">${esc(b.year ? `${b.year} (${b.category})` : b.category)}</option>`)
-                    .join('');
-            }
-
-            function checkAutoFillButtons() {
-                const sireRing = document.getElementById('sireRingInput').value.trim();
-                const sireMatch = findByRing(sireRing);
-                document.getElementById('quickFillSireBtn').classList.toggle('hidden', !sireMatch);
-
-                const damRing = document.getElementById('damRingInput').value.trim();
-                const damMatch = findByRing(damRing);
-                document.getElementById('quickFillDamBtn').classList.toggle('hidden', !damMatch);
-            }
-
-            function applyAutoFill(side) {
-                const isSire = side === 'sire';
-                const ringVal = document.getElementById(isSire ? 'sireRingInput' : 'damRingInput').value.trim();
-                const match = findByRing(ringVal);
-                if (!match) return;
-
-                document.getElementById(isSire ? 'sireYearInput' : 'damYearInput').value = match.year || '';
-                document.getElementById(isSire ? 'sireDetailsInput' : 'damDetailsInput').value = match.notes || '';
-
-                const anc = match.ancestors || {};
-                const prefix = isSire ? 'f' : 'm';
-                const subKeys = ['f', 'm', 'ff', 'fm', 'mf', 'mm'];
-
-                subKeys.forEach(sub => {
-                    const targetKey = prefix + sub;
-                    let src = anc[sub] || null;
-                    if (!src && sub === 'f' && match.sire) {
-                        src = { ring: match.sire, year: '', details: '' };
-                    }
-                    if (!src && sub === 'm' && match.dam) {
-                        src = { ring: match.dam, year: '', details: '' };
-                    }
-                    const rEl = document.getElementById(`gp_${targetKey}_ring`);
-                    const yEl = document.getElementById(`gp_${targetKey}_year`);
-                    const dEl = document.getElementById(`gp_${targetKey}_details`);
-                    if (rEl) rEl.value = (src && src.ring) || '';
-                    if (yEl) yEl.value = (src && src.year) || '';
-                    if (dEl) dEl.value = (src && src.details) || '';
-                });
-
-                showToast(`Auto-filled ${isSire ? 'Sire' : 'Dam'} lineage from ${match.ring}.`);
-            }
-
-            function updateModeVisibility() {
-                const selectedCat = document.querySelector('input[name="cat"]:checked');
-                const isParent = selectedCat && selectedCat.value === 'parent';
-                document.getElementById('offspringParentsSection').classList.toggle('hidden', isParent);
-                document.getElementById('parentLineageSection').classList.toggle('hidden', !isParent);
-                if (isParent) checkAutoFillButtons();
-            }
-
-            function resetFormToOffspring() {
-                document.getElementById('birdForm').reset();
-                document.getElementById('editId').value = '';
-                document.getElementById('formTitle').textContent = 'Add New Bird';
-                document.getElementById('submitBtn').textContent = 'Save Bird';
-                document.getElementById('cancelTopBtn').classList.add('hidden');
-                document.getElementById('quickFillSireBtn').classList.add('hidden');
-                document.getElementById('quickFillDamBtn').classList.add('hidden');
-
-                const offRadio = document.querySelector('input[name="cat"][value="offspring"]');
-                if (offRadio) offRadio.checked = true;
-                updateModeVisibility();
-            }
-
-            function switchTab(tabName) {
-                activeTab = tabName;
-                document.querySelectorAll('.view').forEach(sec => sec.classList.add('hidden'));
-                const target = document.getElementById('tab-' + tabName);
-                if (target) target.classList.remove('hidden');
-
-                document.querySelectorAll('#mainNav .nav-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.tab === tabName);
-                });
-
-                if (tabName === 'parents') {
-                    parentGenderFilter = 'M';
-                    document.querySelectorAll('#filterParents .pill-btn').forEach(btn => {
-                        btn.classList.toggle('active', btn.dataset.gender === 'M');
-                    });
-                }
-
-                if (tabName === 'offspring' || tabName === 'parents') {
-                    renderLists();
-                }
-            }
-
-            function renderParentLink(ringStr) {
-                if (!ringStr) return '<span>—</span>';
-                const linked = findByRing(ringStr);
-                if (linked) {
-                    return `<button type="button" class="ring-link" data-action="pedigree" data-id="${esc(linked.id)}">${esc(ringStr)}</button>`;
-                }
-                return `<strong>${esc(ringStr)}</strong>`;
-            }
-
-            function renderOffspringCard(bird) {
-                const isMale = bird.gender === 'M';
-                const sexBadge = isMale
-                    ? '<span class="sex-tag sex-m">Male ♂</span>'
-                    : '<span class="sex-tag sex-f">Female ♀</span>';
-                const yearBadge = bird.year ? `<span class="year-tag">${esc(bird.year)}</span>` : '';
-                const sireRing = bird.sire || (bird.ancestors && bird.ancestors.f && bird.ancestors.f.ring) || '';
-                const damRing = bird.dam || (bird.ancestors && bird.ancestors.m && bird.ancestors.m.ring) || '';
-
-                return `
-                    <article class="bird-card">
-                        <div class="card-head">
-                            <button type="button" class="ring-btn" data-action="pedigree" data-id="${esc(bird.id)}">${esc(bird.ring)}</button>
-                            <div class="badges">${yearBadge}${sexBadge}</div>
-                        </div>
-                        <div class="parents-row">
-                            <span>Sire: ${renderParentLink(sireRing)}</span>
-                            <span>Dam: ${renderParentLink(damRing)}</span>
-                        </div>
-                        ${bird.notes ? `<div class="note-line">${esc(bird.notes)}</div>` : ''}
-                        <div class="actions-row">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-ped" data-action="pedigree" data-id="${esc(bird.id)}">Pedigree</button>
-                                <button type="button" class="btn btn-promote" data-action="promote" data-id="${esc(bird.id)}">Promote to Parent</button>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-ghost" data-action="edit" data-id="${esc(bird.id)}">Edit</button>
-                                <button type="button" class="btn btn-danger" data-action="delete" data-id="${esc(bird.id)}">Delete</button>
-                            </div>
-                        </div>
-                    </article>
-                `;
-            }
-
-            function renderParentCard(bird) {
-                const isMale = bird.gender === 'M';
-                const sexBadge = isMale
-                    ? '<span class="sex-tag sex-m">Male ♂</span>'
-                    : '<span class="sex-tag sex-f">Female ♀</span>';
-                const yearBadge = bird.year ? `<span class="year-tag">${esc(bird.year)}</span>` : '';
-
-                const targetRing = normRing(bird.ring);
-                const kids = birds.filter(k =>
-                    normRing(k.sire) === targetRing || normRing(k.dam) === targetRing
-                );
-
-                const kidChips = kids.length > 0
-                    ? kids.map(k => `<button type="button" class="kid-chip" data-action="pedigree" data-id="${esc(k.id)}">${esc(k.ring)}</button>`).join('')
-                    : '<span>None</span>';
-
-                return `
-                    <article class="bird-card">
-                        <div class="card-head">
-                            <button type="button" class="ring-btn" data-action="pedigree" data-id="${esc(bird.id)}">${esc(bird.ring)}</button>
-                            <div class="badges">${yearBadge}${sexBadge}</div>
-                        </div>
-                        <div class="offspring-row">
-                            <strong>Offspring (${kids.length}):</strong> ${kidChips}
-                        </div>
-                        ${bird.notes ? `<div class="note-line">${esc(bird.notes)}</div>` : ''}
-                        <div class="actions-row">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-ped" data-action="pedigree" data-id="${esc(bird.id)}">Pedigree</button>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-ghost" data-action="edit" data-id="${esc(bird.id)}">Edit</button>
-                                <button type="button" class="btn btn-danger" data-action="delete" data-id="${esc(bird.id)}">Delete</button>
-                            </div>
-                        </div>
-                    </article>
-                `;
-            }
-
-            function renderLists() {
-                const qOff = document.getElementById('searchOffspring').value.trim().toLowerCase();
-                const qPar = document.getElementById('searchParents').value.trim().toLowerCase();
-
-                const offspringList = birds.filter(b => {
-                    if (b.category !== 'offspring') return false;
-                    if (!qOff) return true;
-                    return `${b.ring} ${b.year} ${b.sire} ${b.dam} ${b.notes}`.toLowerCase().includes(qOff);
-                });
-
-                const parentsList = birds.filter(b => {
-                    if (b.category !== 'parent') return false;
-                    if (b.gender !== parentGenderFilter) return false;
-                    if (!qPar) return true;
-                    return `${b.ring} ${b.year} ${b.sire} ${b.dam} ${b.notes}`.toLowerCase().includes(qPar);
-                });
-
-                document.getElementById('countOffspring').textContent = `${offspringList.length} ${offspringList.length === 1 ? 'Bird' : 'Birds'}`;
-                document.getElementById('countParents').textContent = `${parentsList.length} ${parentsList.length === 1 ? 'Bird' : 'Birds'}`;
-
-                const offBox = document.getElementById('listOffspring');
-                offBox.innerHTML = offspringList.length > 0
-                    ? offspringList.map(renderOffspringCard).join('')
-                    : `<div class="empty-box">No offspring birds recorded yet. Tap <strong>+ Add</strong> to add a bird.</div>`;
-
-                const parBox = document.getElementById('listParents');
-                const gWord = parentGenderFilter === 'M' ? 'male' : 'female';
-                parBox.innerHTML = parentsList.length > 0
-                    ? parentsList.map(renderParentCard).join('')
-                    : `<div class="empty-box">No ${gWord} parent birds found.</div>`;
-            }
-
-            function collectParentLineage() {
-                const map = {};
-                const specs = [
-                    ['f', 'sireRingInput', 'sireYearInput', 'sireDetailsInput'],
-                    ['m', 'damRingInput', 'damYearInput', 'damDetailsInput'],
-                    ['ff', 'gp_ff_ring', 'gp_ff_year', 'gp_ff_details'],
-                    ['fm', 'gp_fm_ring', 'gp_fm_year', 'gp_fm_details'],
-                    ['mf', 'gp_mf_ring', 'gp_mf_year', 'gp_mf_details'],
-                    ['mm', 'gp_mm_ring', 'gp_mm_year', 'gp_mm_details'],
-                    ['fff', 'gp_fff_ring', 'gp_fff_year', 'gp_fff_details'],
-                    ['ffm', 'gp_ffm_ring', 'gp_ffm_year', 'gp_ffm_details'],
-                    ['fmf', 'gp_fmf_ring', 'gp_fmf_year', 'gp_fmf_details'],
-                    ['fmm', 'gp_fmm_ring', 'gp_fmm_year', 'gp_fmm_details'],
-                    ['mff', 'gp_mff_ring', 'gp_mff_year', 'gp_mff_details'],
-                    ['mfm', 'gp_mfm_ring', 'gp_mfm_year', 'gp_mfm_details'],
-                    ['mmf', 'gp_mmf_ring', 'gp_mmf_year', 'gp_mmf_details'],
-                    ['mmm', 'gp_mmm_ring', 'gp_mmm_year', 'gp_mmm_details']
-                ];
-                specs.forEach(([key, rId, yId, dId]) => {
-                    const ring = document.getElementById(rId).value.trim();
-                    const year = document.getElementById(yId).value.trim();
-                    const details = document.getElementById(dId).value.trim();
-                    if (ring || year || details) {
-                        map[key] = { ring, year, details };
-                    }
-                });
-                return map;
-            }
-
-            function handleSaveBird(e) {
-                e.preventDefault();
-                const editId = document.getElementById('editId').value.trim();
-                const catEl = document.querySelector('input[name="cat"]:checked');
-                const category = catEl ? catEl.value : 'offspring';
-                const ring = document.getElementById('ringInput').value.trim();
-                const year = document.getElementById('yearInput').value.trim();
-                const gender = document.getElementById('genderInput').value;
-                const notes = document.getElementById('notesInput').value.trim();
-
-                let sire = '';
-                let dam = '';
-                let ancestors = {};
-
-                if (category === 'parent') {
-                    ancestors = collectParentLineage();
-                    sire = ancestors.f ? ancestors.f.ring : '';
-                    dam = ancestors.m ? ancestors.m.ring : '';
-                } else {
-                    sire = document.getElementById('offSireInput').value.trim();
-                    dam = document.getElementById('offDamInput').value.trim();
-                }
-
-                if (!ring || !year) {
-                    showToast('Please enter Ring Number and Year.');
-                    return;
-                }
-
-                const dup = birds.find(b => normRing(b.ring) === normRing(ring) && b.id !== editId);
-                if (dup) {
-                    showToast(`Ring number "${ring}" already exists.`);
-                    return;
-                }
-
-                if (editId) {
-                    const idx = birds.findIndex(b => b.id === editId);
-                    if (idx !== -1) {
-                        birds[idx] = {
-                            ...birds[idx],
-                            category,
-                            ring,
-                            year,
-                            gender,
-                            sire,
-                            dam,
-                            notes,
-                            ancestors: category === 'parent' ? ancestors : (birds[idx].ancestors || {})
-                        };
-                        showToast('Bird record updated.');
-                    }
-                } else {
-                    birds.unshift({
-                        id: 'bird-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
-                        category,
-                        ring,
-                        year,
-                        gender,
-                        sire,
-                        dam,
-                        notes,
-                        ancestors
-                    });
-                    showToast('Bird record saved.');
-                }
-
-                saveData();
-                resetFormToOffspring();
-
-                if (category === 'parent') {
-                    switchTab('parents');
-                    parentGenderFilter = gender;
-                    document.querySelectorAll('#filterParents .pill-btn').forEach(btn => {
-                        btn.classList.toggle('active', btn.dataset.gender === gender);
-                    });
-                    renderLists();
-                } else {
-                    switchTab('offspring');
-                }
-            }
-
-            function beginEdit(id) {
-                const bird = findById(id);
-                if (!bird) return;
-
-                switchTab('add');
-                document.getElementById('editId').value = bird.id;
-                document.getElementById('formTitle').textContent = 'Edit Bird: ' + bird.ring;
-                document.getElementById('submitBtn').textContent = 'Update Bird';
-                document.getElementById('cancelTopBtn').classList.remove('hidden');
-
-                const radio = document.querySelector(`input[name="cat"][value="${bird.category}"]`);
-                if (radio) radio.checked = true;
-                updateModeVisibility();
-
-                document.getElementById('ringInput').value = bird.ring || '';
-                document.getElementById('yearInput').value = bird.year || '';
-                document.getElementById('genderInput').value = bird.gender || 'M';
-                document.getElementById('notesInput').value = bird.notes || '';
-
-                if (bird.category === 'parent') {
-                    const anc = bird.ancestors || {};
-                    const fObj = anc.f || { ring: bird.sire || '', year: '', details: '' };
-                    const mObj = anc.m || { ring: bird.dam || '', year: '', details: '' };
-
-                    document.getElementById('sireRingInput').value = fObj.ring || '';
-                    document.getElementById('sireYearInput').value = fObj.year || '';
-                    document.getElementById('sireDetailsInput').value = fObj.details || '';
-
-                    document.getElementById('damRingInput').value = mObj.ring || '';
-                    document.getElementById('damYearInput').value = mObj.year || '';
-                    document.getElementById('damDetailsInput').value = mObj.details || '';
-
-                    const subKeys = ['ff', 'fm', 'mf', 'mm', 'fff', 'ffm', 'fmf', 'fmm', 'mff', 'mfm', 'mmf', 'mmm'];
-                    subKeys.forEach(k => {
-                        const slot = anc[k] || { ring: '', year: '', details: '' };
-                        document.getElementById(`gp_${k}_ring`).value = slot.ring || '';
-                        document.getElementById(`gp_${k}_year`).value = slot.year || '';
-                        document.getElementById(`gp_${k}_details`).value = slot.details || '';
-                    });
-                    checkAutoFillButtons();
-                } else {
-                    document.getElementById('offSireInput').value = bird.sire || '';
-                    document.getElementById('offDamInput').value = bird.dam || '';
-                }
-            }
-
-            function promoteToParent(id) {
-                const bird = findById(id);
-                if (!bird) return;
-                bird.category = 'parent';
-                if (!bird.ancestors) bird.ancestors = {};
-                if (bird.sire && !bird.ancestors.f) {
-                    const sRec = findByRing(bird.sire);
-                    bird.ancestors.f = { ring: bird.sire, year: sRec ? sRec.year : '', details: sRec ? sRec.notes : '' };
-                }
-                if (bird.dam && !bird.ancestors.m) {
-                    const dRec = findByRing(bird.dam);
-                    bird.ancestors.m = { ring: bird.dam, year: dRec ? dRec.year : '', details: dRec ? dRec.notes : '' };
-                }
-                saveData();
-                renderLists();
-                showToast(`${bird.ring} promoted to Parents.`);
-            }
-
-            function askConfirm(message, fn) {
-                document.getElementById('confirmText').textContent = message;
-                pendingConfirmFn = fn;
-                document.getElementById('confirmModal').classList.remove('hidden');
-            }
-
-            function closeConfirm() {
-                document.getElementById('confirmModal').classList.add('hidden');
-                pendingConfirmFn = null;
-            }
-
-            function deleteRecord(id) {
-                const bird = findById(id);
-                if (!bird) return;
-                askConfirm(`Delete "${bird.ring}" permanently?`, () => {
-                    birds = birds.filter(b => b.id !== id);
-                    saveData();
-                    renderLists();
-                    showToast('Bird deleted.');
-                });
-            }
-
-            /* =========================================================
-               4-COLUMN PEDIGREE RESOLUTION WITH INHERITANCE
-               ========================================================= */
-            function resolveSlot(rootBird, path) {
-                if (!rootBird || !path) return null;
-
-                const directInline = rootBird.ancestors && rootBird.ancestors[path] ? rootBird.ancestors[path] : null;
-
-                let curr = rootBird;
-                let walkedBird = null;
-                const seen = new Set([rootBird.id]);
-
-                for (let i = 0; i < path.length; i++) {
-                    const step = path[i];
-                    const nextRing = step === 'f'
-                        ? (curr.sire || (curr.ancestors && curr.ancestors.f && curr.ancestors.f.ring))
-                        : (curr.dam || (curr.ancestors && curr.ancestors.m && curr.ancestors.m.ring));
-                    if (!nextRing) {
-                        curr = null;
-                        break;
-                    }
-                    const found = findByRing(nextRing);
-                    if (found && !seen.has(found.id)) {
-                        seen.add(found.id);
-                        curr = found;
-                        if (i === path.length - 1) walkedBird = found;
-                    } else {
-                        curr = null;
-                        break;
-                    }
-                }
-
-                let inheritedFromParent = null;
-                if (path.length >= 2) {
-                    const pStep = path[0];
-                    const subStep = path.slice(1);
-                    const pRing = pStep === 'f'
-                        ? (rootBird.sire || (rootBird.ancestors && rootBird.ancestors.f && rootBird.ancestors.f.ring))
-                        : (rootBird.dam || (rootBird.ancestors && rootBird.ancestors.m && rootBird.ancestors.m.ring));
-                    const pBird = findByRing(pRing);
-                    if (pBird && pBird.ancestors && pBird.ancestors[subStep]) {
-                        inheritedFromParent = pBird.ancestors[subStep];
-                    }
-                }
-
-                let inheritedFromGP = null;
-                if (path.length === 3) {
-                    const gpPath = path.slice(0, 2);
-                    const leafStep = path[2];
-                    const gpResolved = resolveSlot(rootBird, gpPath);
-                    if (gpResolved && gpResolved.linkedBird && gpResolved.linkedBird.ancestors && gpResolved.linkedBird.ancestors[leafStep]) {
-                        inheritedFromGP = gpResolved.linkedBird.ancestors[leafStep];
-                    }
-                }
-
-                const ring = (walkedBird && walkedBird.ring)
-                    || (directInline && directInline.ring)
-                    || (inheritedFromParent && inheritedFromParent.ring)
-                    || (inheritedFromGP && inheritedFromGP.ring)
-                    || (path === 'f' ? rootBird.sire : (path === 'm' ? rootBird.dam : ''))
-                    || '';
-
-                const linkedBird = walkedBird || (ring ? findByRing(ring) : null);
-
-                const year = (linkedBird && linkedBird.year)
-                    || (directInline && directInline.year)
-                    || (inheritedFromParent && inheritedFromParent.year)
-                    || (inheritedFromGP && inheritedFromGP.year)
-                    || '';
-
-                const details = (directInline && directInline.details)
-                    || (linkedBird && linkedBird.notes)
-                    || (inheritedFromParent && inheritedFromParent.details)
-                    || (inheritedFromGP && inheritedFromGP.details)
-                    || '';
-
-                if (!ring && !year && !details) return null;
-
-                return {
-                    ring: ring || 'Unknown Ring',
-                    year,
-                    details,
-                    linkedBird
-                };
-            }
-
-            function renderNode(rootBird, path, expectedSex, isMain, hasRightBranch, isGGP) {
-                const cls = ['node-card'];
-                if (isMain) cls.push('main-bird');
-                if (isGGP) cls.push('ggp-card');
-                if (expectedSex === 'M') cls.push('sire-b');
-                else if (expectedSex === 'F') cls.push('dam-b');
-                if (hasRightBranch) cls.push('branch-right');
-
-                const sym = expectedSex === 'M' ? '♂' : (expectedSex === 'F' ? '♀' : '');
-
-                if (isMain) {
-                    const meta = [rootBird.year, sym].filter(Boolean).join(' ');
-                    return `
-                        <div class="${cls.join(' ')}">
-                            <div class="n-head">
-                                <div class="n-ring">${esc(rootBird.ring)}</div>
-                                ${meta ? `<span class="n-year-sex">${esc(meta)}</span>` : ''}
-                            </div>
-                            ${rootBird.notes ? `<div class="n-details">${esc(rootBird.notes)}</div>` : ''}
-                        </div>
-                    `;
-                }
-
-                const slot = resolveSlot(rootBird, path);
-                if (!slot) {
-                    return `
-                        <div class="${cls.join(' ')}">
-                            <div class="n-ring" style="color:#94a3b8; font-weight:400;">—</div>
-                        </div>
-                    `;
-                }
-
-                const meta = [slot.year, sym].filter(Boolean).join(' ');
-                const navAttr = slot.linkedBird
-                    ? `data-ped-id="${esc(slot.linkedBird.id)}" title="Open ${esc(slot.linkedBird.ring)} pedigree"`
-                    : '';
-                if (slot.linkedBird) cls.push('clickable');
-
-                return `
-                    <div class="${cls.join(' ')}" ${navAttr}>
-                        <div class="n-head">
-                            <div class="n-ring">${esc(slot.ring)}</div>
-                            ${meta ? `<span class="n-year-sex">${esc(meta)}</span>` : ''}
-                        </div>
-                        ${slot.details ? `<div class="n-details">${esc(slot.details)}</div>` : ''}
-                    </div>
-                `;
-            }
-
-            function openPedigreeModal(id) {
-                const bird = findById(id);
-                if (!bird) return;
-
-                const sym = bird.gender === 'M' ? '♂' : (bird.gender === 'F' ? '♀' : '');
-                const rightParts = [];
-                if (bird.year) rightParts.push(`Year: ${esc(bird.year)}`);
-                if (sym) rightParts.push(sym);
-                const rightMeta = rightParts.join(' • ');
-
-                document.getElementById('pedSheet').innerHTML = `
-                    <div class="ped-top-title">
-                        <div class="ped-loft-info">
-                            <div class="ped-loft-name">Loft Mahmoud Awed</div>
-                            <div class="ped-loft-sub">Tanta</div>
-                            <div class="ped-loft-phone">01069696229</div>
-                        </div>
-                        <div class="ped-bird-info">
-                            <div class="ped-bird-ring">${esc(bird.ring)}</div>
-                            ${rightMeta ? `<div class="ped-bird-meta">${rightMeta}</div>` : ''}
-                        </div>
-                    </div>
-
-                    <div class="ped-cols-4">
-                        <!-- Column 1: Subject Bird -->
-                        <div class="ped-col">
-                            <div class="col-body">
-                                ${renderNode(bird, '', bird.gender, true, true, false)}
-                            </div>
-                        </div>
-
-                        <!-- Column 2: Parents (2) -->
-                        <div class="ped-col">
-                            <div class="col-body">
-                                <div class="pair-wrap">
-                                    ${renderNode(bird, 'f', 'M', false, true, false)}
-                                    ${renderNode(bird, 'm', 'F', false, true, false)}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Column 3: Grandparents (4) -->
-                        <div class="ped-col">
-                            <div class="col-body">
-                                <div class="pair-wrap">
-                                    ${renderNode(bird, 'ff', 'M', false, true, false)}
-                                    ${renderNode(bird, 'fm', 'F', false, true, false)}
-                                </div>
-                                <div class="pair-wrap">
-                                    ${renderNode(bird, 'mf', 'M', false, true, false)}
-                                    ${renderNode(bird, 'mm', 'F', false, true, false)}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Column 4: Great-Grandparents (8) -->
-                        <div class="ped-col">
-                            <div class="col-body">
-                                <div class="pair-wrap">
-                                    ${renderNode(bird, 'fff', 'M', false, false, true)}
-                                    ${renderNode(bird, 'ffm', 'F', false, false, true)}
-                                </div>
-                                <div class="pair-wrap">
-                                    ${renderNode(bird, 'fmf', 'M', false, false, true)}
-                                    ${renderNode(bird, 'fmm', 'F', false, false, true)}
-                                </div>
-                                <div class="pair-wrap">
-                                    ${renderNode(bird, 'mff', 'M', false, false, true)}
-                                    ${renderNode(bird, 'mfm', 'F', false, false, true)}
-                                </div>
-                                <div class="pair-wrap">
-                                    ${renderNode(bird, 'mmf', 'M', false, false, true)}
-                                    ${renderNode(bird, 'mmm', 'F', false, false, true)}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                document.getElementById('pedModal').classList.remove('hidden');
-            }
-
-            function closePedigreeModal() {
-                document.getElementById('pedModal').classList.add('hidden');
-            }
-
-            /* =========================================================
-               BACKUP / CSV / RESTORE / CLEAR
-               ========================================================= */
-            function downloadFile(content, filename, mime) {
-                const blob = new Blob([content], { type: mime });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                setTimeout(() => URL.revokeObjectURL(url), 1000);
-            }
-
-            function exportJsonBackup() {
-                const data = JSON.stringify({
-                    loft: 'Loft Mahmoud Awed',
-                    location: 'Tanta',
-                    phone: '01069696229',
-                    exportedAt: new Date().toISOString(),
-                    birds: birds
-                }, null, 2);
-                downloadFile(data, 'loft-mahmoud-awed-backup.json', 'application/json');
-                showToast('JSON backup exported.');
-            }
-
-            function exportCsvRecords() {
-                const headers = [
-                    'Category', 'Ring Number', 'Year', 'Gender', 'Details',
-                    'Sire Ring', 'Sire Year', 'Sire Details',
-                    'Dam Ring', 'Dam Year', 'Dam Details',
-                    'GP1 Ring', 'GP1 Year', 'GP1 Details',
-                    'GP2 Ring', 'GP2 Year', 'GP2 Details',
-                    'GP3 Ring', 'GP3 Year', 'GP3 Details',
-                    'GP4 Ring', 'GP4 Year', 'GP4 Details',
-                    'GGP1 Ring', 'GGP1 Year', 'GGP1 Details',
-                    'GGP2 Ring', 'GGP2 Year', 'GGP2 Details',
-                    'GGP3 Ring', 'GGP3 Year', 'GGP3 Details',
-                    'GGP4 Ring', 'GGP4 Year', 'GGP4 Details',
-                    'GGP5 Ring', 'GGP5 Year', 'GGP5 Details',
-                    'GGP6 Ring', 'GGP6 Year', 'GGP6 Details',
-                    'GGP7 Ring', 'GGP7 Year', 'GGP7 Details',
-                    'GGP8 Ring', 'GGP8 Year', 'GGP8 Details'
-                ];
-                const rows = birds.map(b => {
-                    const a = b.ancestors || {};
-                    const slotCols = (k, fallbackR) => {
-                        const o = a[k] || {};
-                        return [o.ring || fallbackR || '', o.year || '', o.details || ''];
-                    };
-                    return [
-                        b.category === 'parent' ? 'Parent' : 'Offspring',
-                        b.ring || '',
-                        b.year || '',
-                        b.gender === 'M' ? 'Male' : 'Female',
-                        b.notes || '',
-                        ...slotCols('f', b.sire),
-                        ...slotCols('m', b.dam),
-                        ...slotCols('ff', ''),
-                        ...slotCols('fm', ''),
-                        ...slotCols('mf', ''),
-                        ...slotCols('mm', ''),
-                        ...slotCols('fff', ''),
-                        ...slotCols('ffm', ''),
-                        ...slotCols('fmf', ''),
-                        ...slotCols('fmm', ''),
-                        ...slotCols('mff', ''),
-                        ...slotCols('mfm', ''),
-                        ...slotCols('mmf', ''),
-                        ...slotCols('mmm', '')
-                    ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(',');
-                });
-
-                downloadFile('\uFEFF' + [headers.join(','), ...rows].join('\n'), 'loft-mahmoud-awed.csv', 'text/csv;charset=utf-8;');
-                showToast('CSV file exported.');
-            }
-
-            function importJsonBackup(e) {
-                const file = e.target.files && e.target.files[0];
-                if (!file) return;
-
-                const reader = new FileReader();
-                reader.onload = function (ev) {
-                    try {
-                        const parsed = JSON.parse(ev.target.result);
-                        const list = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.birds) ? parsed.birds : null);
-                        if (!list) {
-                            showToast('Invalid JSON backup file.');
-                            return;
-                        }
-
-                        const imported = list
-                            .filter(item => item && typeof item.ring === 'string' && item.ring.trim())
-                            .map((item, idx) => ({
-                                id: item.id || ('imp-' + Date.now() + '-' + idx),
-                                category: item.category === 'parent' ? 'parent' : 'offspring',
-                                ring: String(item.ring).trim(),
-                                year: String(item.year || '').trim(),
-                                gender: item.gender === 'F' ? 'F' : 'M',
-                                sire: String(item.sire || '').trim(),
-                                dam: String(item.dam || '').trim(),
-                                notes: String(item.notes || '').trim(),
-                                ancestors: sanitizeAncestors(item.ancestors)
-                            }));
-
-                        askConfirm(`Import ${imported.length} birds and replace current records?`, () => {
-                            birds = imported;
-                            saveData();
-                            renderLists();
-                            switchTab('offspring');
-                            showToast(`Imported ${imported.length} birds.`);
-                        });
-                    } catch (err) {
-                        showToast('Failed to parse JSON file.');
-                    } finally {
-                        e.target.value = '';
-                    }
-                };
-                reader.readAsText(file);
-            }
-
-            function clearAllRecords() {
-                askConfirm('Clear ALL data permanently? This cannot be undone.', () => {
-                    birds = [];
-                    saveData();
-                    renderLists();
-                    switchTab('offspring');
-                    showToast('All data cleared.');
-                });
-            }
-
-            function bindEvents() {
-                document.getElementById('mainNav').addEventListener('click', (e) => {
-                    const btn = e.target.closest('.nav-btn');
-                    if (!btn) return;
-                    const tab = btn.dataset.tab;
-                    if (tab === 'add') {
-                        resetFormToOffspring();
-                        switchTab('add');
-                    } else if (tab) {
-                        switchTab(tab);
-                    }
-                });
-
-                document.getElementById('searchOffspring').addEventListener('input', renderLists);
-                document.getElementById('searchParents').addEventListener('input', renderLists);
-
-                document.getElementById('filterParents').addEventListener('click', (e) => {
-                    const btn = e.target.closest('.pill-btn');
-                    if (!btn) return;
-                    parentGenderFilter = btn.dataset.gender;
-                    document.querySelectorAll('#filterParents .pill-btn').forEach(b => {
-                        b.classList.toggle('active', b === btn);
-                    });
-                    renderLists();
-                });
-
-                document.querySelector('main').addEventListener('click', (e) => {
-                    const el = e.target.closest('[data-action]');
-                    if (!el) return;
-                    const action = el.dataset.action;
-                    const id = el.dataset.id;
-                    if (!id) return;
-
-                    if (action === 'pedigree') openPedigreeModal(id);
-                    else if (action === 'promote') promoteToParent(id);
-                    else if (action === 'edit') beginEdit(id);
-                    else if (action === 'delete') deleteRecord(id);
-                });
-
-                document.querySelectorAll('input[name="cat"]').forEach(r => {
-                    r.addEventListener('change', updateModeVisibility);
-                });
-
-                document.getElementById('sireRingInput').addEventListener('input', checkAutoFillButtons);
-                document.getElementById('damRingInput').addEventListener('input', checkAutoFillButtons);
-                document.getElementById('quickFillSireBtn').addEventListener('click', () => applyAutoFill('sire'));
-                document.getElementById('quickFillDamBtn').addEventListener('click', () => applyAutoFill('dam'));
-
-                document.getElementById('birdForm').addEventListener('submit', handleSaveBird);
-                document.getElementById('cancelTopBtn').addEventListener('click', () => {
-                    resetFormToOffspring();
-                    switchTab('offspring');
-                });
-                document.getElementById('cancelBottomBtn').addEventListener('click', () => {
-                    resetFormToOffspring();
-                    switchTab('offspring');
-                });
-
-                document.getElementById('exportJsonBtn').addEventListener('click', exportJsonBackup);
-                document.getElementById('exportCsvBtn').addEventListener('click', exportCsvRecords);
-                document.getElementById('importJsonInput').addEventListener('change', importJsonBackup);
-                document.getElementById('clearAllBtn').addEventListener('click', clearAllRecords);
-
-                document.getElementById('printPedBtn').addEventListener('click', () => window.print());
-                document.getElementById('closePedBtn').addEventListener('click', closePedigreeModal);
-                document.getElementById('pedModal').addEventListener('click', (e) => {
-                    if (e.target.id === 'pedModal') {
-                        closePedigreeModal();
-                        return;
-                    }
-                    const node = e.target.closest('[data-ped-id]');
-                    if (node && node.dataset.pedId) {
-                        openPedigreeModal(node.dataset.pedId);
-                    }
-                });
-
-                document.getElementById('confirmYesBtn').addEventListener('click', () => {
-                    if (typeof pendingConfirmFn === 'function') pendingConfirmFn();
-                    closeConfirm();
-                });
-                document.getElementById('confirmNoBtn').addEventListener('click', closeConfirm);
-                document.getElementById('confirmModal').addEventListener('click', (e) => {
-                    if (e.target.id === 'confirmModal') closeConfirm();
-                });
-            }
-
-            window.addEventListener('DOMContentLoaded', () => {
-                loadData();
-                refreshDatalist();
-                bindEvents();
-                renderLists();
-            });
-        })();
-    </script>
+          }
+        ],
+        offspring: [
+          {
+            id: 'off_sample_101',
+            ring: 'EGY-2025-101',
+            year: '2025',
+            gender: 'Male',
+            sireId: 'par_sample_sire_1',
+            damId: 'par_sample_dam_1',
+            notes: 'Blue Bar • Janssen x Heremans\n1st Club 220km Tanta-Cairo\n3rd District 310km\nStrong keel, bright pearl eye, fast trap'
+          },
+          {
+            id: 'off_sample_102',
+            ring: 'EGY-2025-102',
+            year: '2025',
+            gender: 'Female',
+            sireId: 'par_sample_sire_1',
+            damId: 'par_sample_dam_1',
+            notes: 'Blue Check • Full Sister to 101\n2nd Loft 260km Race\nBalanced body, supple wing, rich violet eye'
+          },
+          {
+            id: 'off_sample_103',
+            ring: 'EGY-2026-103',
+            year: '2026',
+            gender: 'Male',
+            sireId: 'par_sample_sire_1',
+            damId: 'par_sample_dam_1',
+            notes: 'Blue Bar • Youngster 2026\n1st Training Toss 140km\nReserved for 2026 Young Bird Derby'
+          }
+        ]
+      };
+    }
+
+    function loadSampleData(showNotice = false) {
+      const sample = createSampleDataset();
+      state.parents = sample.parents;
+      state.offspring = sample.offspring;
+      saveState();
+      renderOffspring();
+      renderParents();
+      populateParentDropdowns();
+      if (showNotice) {
+        showStatus('Sample test data loaded.');
+      }
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          loadSampleData(false);
+          return;
+        }
+        const parsed = JSON.parse(raw);
+        if (!parsed || typeof parsed !== 'object') {
+          loadSampleData(false);
+          return;
+        }
+        state.offspring = Array.isArray(parsed.offspring) ? parsed.offspring : [];
+        state.parents = Array.isArray(parsed.parents) ? parsed.parents : [];
+      } catch (e) {
+        showStatus('Unable to read saved browser storage.', 'error');
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        showStatus('Storage quota exceeded or blocked by browser.', 'error');
+      }
+    }
+
+    function showStatus(msg, type = 'success') {
+      const banner = document.getElementById('statusBanner');
+      banner.textContent = msg;
+      banner.className = 'status-msg show ' + (type === 'error' ? 'status-error' : 'status-success');
+      clearTimeout(showStatus._timer);
+      showStatus._timer = setTimeout(() => {
+        banner.className = 'status-msg';
+      }, 3400);
+    }
+
+    function switchTab(tabName) {
+      const validTabs = ['offspring', 'parents', 'add', 'backup'];
+      const target = validTabs.includes(tabName) ? tabName : 'offspring';
+
+      for (const name of validTabs) {
+        const panel = document.getElementById('tab-' + name);
+        if (panel) panel.style.display = name === target ? 'block' : 'none';
+      }
+
+      document.querySelectorAll('.nav-btn').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.tab === target);
+      });
+
+      if (target === 'offspring') renderOffspring();
+      if (target === 'parents') renderParents();
+      if (target === 'add') populateParentDropdowns();
+    }
+
+    function buildLineageInputs(lineageData = null) {
+      const container = document.getElementById('lineageCardsContainer');
+      const data = lineageData || createEmptyLineage();
+      container.innerHTML = LINEAGE_SLOTS.map((slot) => {
+        const item = data[slot.key] || { ring: '', year: '', details: '' };
+        return `
+          <div class="ancestor-card">
+            <div class="ancestor-title">${escapeHtml(slot.label)}</div>
+            <div class="ancestor-fields">
+              <input type="text" id="lin_${slot.key}_ring" placeholder="Ring Number" value="${escapeAttr(item.ring)}" />
+              <input type="text" id="lin_${slot.key}_year" placeholder="Year" value="${escapeAttr(item.year)}" />
+              <textarea id="lin_${slot.key}_details" class="ancestor-details" placeholder="Name / Bloodline / Race Results">${escapeHtml(item.details)}</textarea>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function readLineageInputs() {
+      const data = {};
+      for (const slot of LINEAGE_SLOTS) {
+        data[slot.key] = {
+          ring: document.getElementById(`lin_${slot.key}_ring`).value.trim(),
+          year: document.getElementById(`lin_${slot.key}_year`).value.trim(),
+          details: document.getElementById(`lin_${slot.key}_details`).value.trim()
+        };
+      }
+      return data;
+    }
+
+    function setFormMode(mode) {
+      const isParent = mode === 'parent';
+      document.getElementById('recordType').value = isParent ? 'parent' : 'offspring';
+      document.getElementById('offspringFields').style.display = isParent ? 'none' : 'block';
+      document.getElementById('parentLineageFields').style.display = isParent ? 'block' : 'none';
+      document.getElementById('modeOffspringBtn').className = !isParent ? 'btn btn-gold' : 'btn';
+      document.getElementById('modeParentBtn').className = isParent ? 'btn btn-gold' : 'btn';
+      document.getElementById('ringNumber').required = !isParent;
+      document.getElementById('birdYear').required = !isParent;
+
+      if (isParent) {
+        buildLineageInputs();
+      } else {
+        populateParentDropdowns();
+      }
+    }
+
+    function populateParentDropdowns(selectedSireId = '', selectedDamId = '') {
+      const sireSelect = document.getElementById('sireSelect');
+      const damSelect = document.getElementById('damSelect');
+
+      const optionsHtml = state.parents.map((p) => {
+        const selfObj = p.lineage?.self || {};
+        const label = [
+          selfObj.ring || 'Unnamed Parent',
+          selfObj.year ? `(${selfObj.year})` : '',
+          selfObj.details ? selfObj.details.split('\n')[0] : ''
+        ].filter(Boolean).join(' • ');
+        return `<option value="${escapeAttr(p.id)}">${escapeHtml(label)}</option>`;
+      }).join('');
+
+      sireSelect.innerHTML = '<option value="">-- Select Sire --</option>' + optionsHtml;
+      damSelect.innerHTML = '<option value="">-- Select Dam --</option>' + optionsHtml;
+      sireSelect.value = selectedSireId || '';
+      damSelect.value = selectedDamId || '';
+    }
+
+    function openAddOffspring() {
+      resetForm();
+      setFormMode('offspring');
+      document.getElementById('formHeading').textContent = 'Add Offspring';
+      switchTab('add');
+    }
+
+    function openAddParent() {
+      resetForm();
+      setFormMode('parent');
+      document.getElementById('formHeading').textContent = 'Add Parent Lineage';
+      switchTab('add');
+    }
+
+    function resetForm() {
+      document.getElementById('editId').value = '';
+      document.getElementById('ringNumber').value = '';
+      document.getElementById('birdYear').value = '';
+      document.getElementById('birdGender').value = 'Male';
+      document.getElementById('birdNotes').value = '';
+      document.getElementById('formHeading').textContent = 'Add New Record';
+      populateParentDropdowns();
+      buildLineageInputs(createEmptyLineage());
+    }
+
+    function saveRecord(event) {
+      event.preventDefault();
+      const mode = document.getElementById('recordType').value;
+      const editId = document.getElementById('editId').value;
+
+      if (mode === 'offspring') {
+        const ring = document.getElementById('ringNumber').value.trim();
+        const year = document.getElementById('birdYear').value.trim();
+        const gender = document.getElementById('birdGender').value;
+        const sireId = document.getElementById('sireSelect').value;
+        const damId = document.getElementById('damSelect').value;
+        const notes = document.getElementById('birdNotes').value.trim();
+
+        if (!ring || !year) {
+          showStatus('Please enter Ring Number and Year.', 'error');
+          return;
+        }
+
+        if (editId) {
+          const idx = state.offspring.findIndex((b) => b.id === editId);
+          if (idx !== -1) {
+            state.offspring[idx] = { ...state.offspring[idx], ring, year, gender, sireId, damId, notes };
+          }
+        } else {
+          state.offspring.unshift({
+            id: 'off_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+            ring,
+            year,
+            gender,
+            sireId,
+            damId,
+            notes
+          });
+        }
+        saveState();
+        showStatus('Offspring record saved.');
+        resetForm();
+        switchTab('offspring');
+      } else {
+        const lineage = readLineageInputs();
+        const hasAny = Object.values(lineage).some((v) => v.ring || v.year || v.details);
+        if (!hasAny) {
+          showStatus('Please enter lineage details before saving.', 'error');
+          return;
+        }
+
+        if (editId) {
+          const idx = state.parents.findIndex((p) => p.id === editId);
+          if (idx !== -1) {
+            state.parents[idx] = { ...state.parents[idx], lineage };
+          }
+        } else {
+          state.parents.unshift({
+            id: 'par_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+            lineage
+          });
+        }
+        saveState();
+        showStatus('Parent lineage saved.');
+        resetForm();
+        switchTab('parents');
+      }
+    }
+
+    function editOffspring(id) {
+      const bird = state.offspring.find((b) => b.id === id);
+      if (!bird) return;
+      setFormMode('offspring');
+      document.getElementById('editId').value = bird.id;
+      document.getElementById('ringNumber').value = bird.ring || '';
+      document.getElementById('birdYear').value = bird.year || '';
+      document.getElementById('birdGender').value = bird.gender || 'Male';
+      document.getElementById('birdNotes').value = bird.notes || '';
+      populateParentDropdowns(bird.sireId || '', bird.damId || '');
+      document.getElementById('formHeading').textContent = 'Edit Offspring: ' + (bird.ring || '');
+      switchTab('add');
+    }
+
+    function editParent(id) {
+      const parent = state.parents.find((p) => p.id === id);
+      if (!parent) return;
+      setFormMode('parent');
+      document.getElementById('editId').value = parent.id;
+      buildLineageInputs(parent.lineage);
+      const label = parent.lineage?.self?.ring || 'Parent';
+      document.getElementById('formHeading').textContent = 'Edit Parent Lineage: ' + label;
+      switchTab('add');
+    }
+
+    function deleteOffspring(id) {
+      state.offspring = state.offspring.filter((b) => b.id !== id);
+      saveState();
+      renderOffspring();
+      showStatus('Offspring deleted.');
+    }
+
+    function deleteParent(id) {
+      state.parents = state.parents.filter((p) => p.id !== id);
+      saveState();
+      renderParents();
+      showStatus('Parent lineage deleted.');
+    }
+
+    function getParentById(id) {
+      return state.parents.find((p) => p.id === id) || null;
+    }
+
+    function formatNodeSummary(node) {
+      if (!node || (!node.ring && !node.year && !node.details)) return '—';
+      const firstDetail = node.details ? node.details.split('\n')[0] : '';
+      const base = [node.ring, node.year ? `(${node.year})` : ''].filter(Boolean).join(' ');
+      return firstDetail ? `${base} • ${firstDetail}` : base;
+    }
+
+    function inferSymbol(genderVal, detailsVal = '') {
+      const g = String(genderVal || '').toLowerCase();
+      if (g === 'male' || g === 'm' || g === '♂') return '♂';
+      if (g === 'female' || g === 'f' || g === '♀') return '♀';
+      const d = String(detailsVal || '').toLowerCase();
+      if (d.includes('hen') || d.includes('dam') || d.includes('female')) return '♀';
+      if (d.includes('cock') || d.includes('sire') || d.includes('male')) return '♂';
+      return '';
+    }
+
+    function formatCertCell(node, fallbackRing = '—', symbol = '') {
+      if (!node || (!node.ring && !node.year && !node.details)) {
+        return { ring: fallbackRing, symbol, title: '', sub: '' };
+      }
+
+      const rawLines = String(node.details || '')
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+      const title = rawLines.length > 0 ? rawLines[0] : (node.year ? `Year ${node.year}` : '');
+      const subParts = [];
+      if (node.year && rawLines.length > 0) {
+        subParts.push(`Year: ${node.year}`);
+      }
+      if (rawLines.length > 1) {
+        subParts.push(...rawLines.slice(1));
+      }
+
+      return {
+        ring: node.ring || fallbackRing,
+        symbol,
+        title,
+        sub: subParts.join('\n')
+      };
+    }
+
+    // Automatically inherits 4 generations from selected Sire and Dam parent lineages
+    function buildFullOffspringPedigree(bird) {
+      const sireRec = bird.sireId ? getParentById(bird.sireId) : null;
+      const damRec = bird.damId ? getParentById(bird.damId) : null;
+
+      const sLin = sireRec?.lineage || createEmptyLineage();
+      const dLin = damRec?.lineage || createEmptyLineage();
+
+      const symbol = inferSymbol(bird.gender, bird.notes);
+      const col1 = [
+        {
+          ring: bird.ring || '—',
+          symbol,
+          title: [bird.gender || '', bird.year ? `Year ${bird.year}` : ''].filter(Boolean).join(' • '),
+          sub: bird.notes || ''
+        }
+      ];
+
+      const col2 = [
+        formatCertCell(sLin.self, '—', '♂'),
+        formatCertCell(dLin.self, '—', '♀')
+      ];
+
+      const col3 = [
+        formatCertCell(sLin.sire, '—', '♂'),
+        formatCertCell(sLin.dam, '—', '♀'),
+        formatCertCell(dLin.sire, '—', '♂'),
+        formatCertCell(dLin.dam, '—', '♀')
+      ];
+
+      const col4 = [
+        formatCertCell(sLin.pgs, '—', '♂'),
+        formatCertCell(sLin.pgd, '—', '♀'),
+        formatCertCell(sLin.mgs, '—', '♂'),
+        formatCertCell(sLin.mgd, '—', '♀'),
+        formatCertCell(dLin.pgs, '—', '♂'),
+        formatCertCell(dLin.pgd, '—', '♀'),
+        formatCertCell(dLin.mgs, '—', '♂'),
+        formatCertCell(dLin.mgd, '—', '♀')
+      ];
+
+      const headline = `${bird.ring || 'Pedigree'}${bird.year ? ' (' + bird.year + ')' : ''}${bird.gender ? ' ' + (bird.gender === 'Male' ? 'M' : 'F') : ''}`;
+      return { columns: [col1, col2, col3, col4], headline };
+    }
+
+    function buildParentPedigree(parentRec) {
+      const lin = parentRec.lineage || createEmptyLineage();
+      const selfCell = formatCertCell(lin.self, '—', inferSymbol('', lin.self?.details));
+      const col1 = [selfCell];
+      const col2 = [
+        formatCertCell(lin.sire, '—', '♂'),
+        formatCertCell(lin.dam, '—', '♀')
+      ];
+      const col3 = [
+        formatCertCell(lin.pgs, '—', '♂'),
+        formatCertCell(lin.pgd, '—', '♀'),
+        formatCertCell(lin.mgs, '—', '♂'),
+        formatCertCell(lin.mgd, '—', '♀')
+      ];
+      const col4 = [
+        formatCertCell(lin.pggs, '—', '♂'),
+        formatCertCell(lin.pggd, '—', '♀'),
+        formatCertCell(lin.pgms, '—', '♂'),
+        formatCertCell(lin.pgmd, '—', '♀'),
+        formatCertCell(lin.mggs, '—', '♂'),
+        formatCertCell(lin.mggd, '—', '♀'),
+        formatCertCell(lin.mgms, '—', '♂'),
+        formatCertCell(lin.mgmd, '—', '♀')
+      ];
+
+      const headline = `${lin.self?.ring || 'Pedigree'}${lin.self?.year ? ' (' + lin.self.year + ')' : ''}`;
+      return { columns: [col1, col2, col3, col4], headline };
+    }
+
+    function renderPedigreeNodeHtml(n) {
+      return `
+        <div class="ped-node">
+          <div class="ped-node-top">
+            <span class="ped-ring">${escapeHtml(n.ring)}</span>
+            ${n.symbol ? `<span class="ped-symbol">${escapeHtml(n.symbol)}</span>` : ''}
+          </div>
+          ${n.title ? `<div class="ped-title">${escapeHtml(n.title)}</div>` : ''}
+          ${n.sub ? `<div class="ped-sub">${escapeHtml(n.sub)}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function openPedigree(type, id) {
+      const record = type === 'offspring'
+        ? state.offspring.find((b) => b.id === id)
+        : state.parents.find((p) => p.id === id);
+
+      if (!record) {
+        showStatus('Record not found.', 'error');
+        return;
+      }
+
+      const data = type === 'offspring'
+        ? buildFullOffspringPedigree(record)
+        : buildParentPedigree(record);
+
+      document.getElementById('certHeadline').textContent = data.headline;
+
+      const grid = document.getElementById('pedigreeGrid');
+      grid.innerHTML = data.columns.map((colNodes, colIdx) => {
+        if (colIdx === 0) {
+          return `
+            <div class="ped-col">
+              <div class="ped-col-1-wrap">
+                ${colNodes.map(renderPedigreeNodeHtml).join('')}
+                <div class="loft-contact-block">
+                  <strong>Loft Mahmoud Awed</strong><br />
+                  Tanta, Egypt<br />
+                  Tel.: 01069696229
+                </div>
+              </div>
+            </div>
+          `;
+        }
+        const pairs = [];
+        for (let i = 0; i < colNodes.length; i += 2) {
+          const pairHtml = colNodes.slice(i, i + 2).map(renderPedigreeNodeHtml).join('');
+          pairs.push(`<div class="ped-pair">${pairHtml}</div>`);
+        }
+        return `<div class="ped-col">${pairs.join('')}</div>`;
+      }).join('');
+
+      document.getElementById('pedigreeModal').classList.add('open');
+    }
+
+    function closePedigree() {
+      document.getElementById('pedigreeModal').classList.remove('open');
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'pedigreeModal') {
+        closePedigree();
+      }
+    }
+
+    function renderOffspring() {
+      const q = document.getElementById('offspringSearch').value.trim().toLowerCase();
+      const genderFilter = document.getElementById('offspringGenderFilter').value;
+
+      const filtered = state.offspring.filter((b) => {
+        if (genderFilter !== 'all' && b.gender !== genderFilter) return false;
+        if (!q) return true;
+        const sireName = formatNodeSummary(getParentById(b.sireId)?.lineage?.self).toLowerCase();
+        const damName = formatNodeSummary(getParentById(b.damId)?.lineage?.self).toLowerCase();
+        return (
+          (b.ring || '').toLowerCase().includes(q) ||
+          (b.year || '').toLowerCase().includes(q) ||
+          (b.notes || '').toLowerCase().includes(q) ||
+          sireName.includes(q) ||
+          damName.includes(q)
+        );
+      });
+
+      document.getElementById('offspringCount').textContent = `${filtered.length} bird(s)`;
+      const listEl = document.getElementById('offspringList');
+
+      if (!filtered.length) {
+        listEl.innerHTML = '<div class="empty-state">No offspring records found. Click "+ Add Offspring" to create one.</div>';
+        return;
+      }
+
+      listEl.innerHTML = filtered.map((b) => {
+        const sireText = formatNodeSummary(getParentById(b.sireId)?.lineage?.self);
+        const damText = formatNodeSummary(getParentById(b.damId)?.lineage?.self);
+        const badgeClass = b.gender === 'Female' ? 'badge-female' : 'badge-male';
+
+        return `
+          <article class="bird-card">
+            <div>
+              <div class="bird-top">
+                <div>
+                  <div class="bird-ring">${escapeHtml(b.ring)}</div>
+                  <div class="bird-year">Year: ${escapeHtml(b.year)}</div>
+                </div>
+                <span class="badge ${badgeClass}">${escapeHtml(b.gender || 'Male')}</span>
+              </div>
+              <div class="bird-line"><strong>Sire:</strong> ${escapeHtml(sireText)}</div>
+              <div class="bird-line"><strong>Dam:</strong> ${escapeHtml(damText)}</div>
+              ${b.notes ? `<div class="bird-notes">${escapeHtml(b.notes)}</div>` : ''}
+            </div>
+            <div class="card-actions">
+              <button type="button" class="btn btn-gold" onclick="openPedigree('offspring', '${escapeAttr(b.id)}')">Pedigree</button>
+              <button type="button" class="btn" onclick="editOffspring('${escapeAttr(b.id)}')">Edit</button>
+              <button type="button" class="btn btn-danger" onclick="deleteOffspring('${escapeAttr(b.id)}')">Delete</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderParents() {
+      const q = document.getElementById('parentsSearch').value.trim().toLowerCase();
+      const filtered = state.parents.filter((p) => {
+        if (!q) return true;
+        return JSON.stringify(p.lineage || {}).toLowerCase().includes(q);
+      });
+
+      document.getElementById('parentsCount').textContent = `${filtered.length} lineage(s)`;
+      const listEl = document.getElementById('parentsList');
+
+      if (!filtered.length) {
+        listEl.innerHTML = '<div class="empty-state">No parent lineages found. Click "+ Add Parent Lineage" to add one.</div>';
+        return;
+      }
+
+      listEl.innerHTML = filtered.map((p) => {
+        const selfObj = p.lineage?.self || {};
+        const sireObj = p.lineage?.sire || {};
+        const damObj = p.lineage?.dam || {};
+        const subtitle = [selfObj.year, selfObj.details ? selfObj.details.split('\n')[0] : '']
+          .filter(Boolean)
+          .join(' • ') || 'Breeding Stock';
+
+        return `
+          <article class="bird-card">
+            <div>
+              <div class="bird-top">
+                <div>
+                  <div class="bird-ring">${escapeHtml(selfObj.ring || 'Unnamed Parent')}</div>
+                  <div class="bird-year">${escapeHtml(subtitle)}</div>
+                </div>
+                <span class="badge badge-parent">Parent</span>
+              </div>
+              <div class="bird-line"><strong>Sire:</strong> ${escapeHtml(formatNodeSummary(sireObj))}</div>
+              <div class="bird-line"><strong>Dam:</strong> ${escapeHtml(formatNodeSummary(damObj))}</div>
+            </div>
+            <div class="card-actions">
+              <button type="button" class="btn btn-gold" onclick="openPedigree('parent', '${escapeAttr(p.id)}')">Pedigree</button>
+              <button type="button" class="btn" onclick="editParent('${escapeAttr(p.id)}')">Edit</button>
+              <button type="button" class="btn btn-danger" onclick="deleteParent('${escapeAttr(p.id)}')">Delete</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function exportJSON() {
+      const payload = JSON.stringify({
+        loft: 'Loft Mahmoud Awed',
+        location: 'Tanta',
+        phone: '01069696229',
+        exportedAt: new Date().toISOString(),
+        offspring: state.offspring,
+        parents: state.parents
+      }, null, 2);
+      downloadFile(payload, 'loft-mahmoud-awed-backup.json', 'application/json');
+      showStatus('JSON backup downloaded.');
+    }
+
+    function exportCSV() {
+      const rows = [['Type', 'Ring', 'Year', 'Gender', 'Sire', 'Dam', 'Notes']];
+      for (const b of state.offspring) {
+        const sireText = formatNodeSummary(getParentById(b.sireId)?.lineage?.self);
+        const damText = formatNodeSummary(getParentById(b.damId)?.lineage?.self);
+        rows.push(['Offspring', b.ring || '', b.year || '', b.gender || '', sireText, damText, b.notes || '']);
+      }
+      for (const p of state.parents) {
+        const l = p.lineage || {};
+        rows.push([
+          'Parent',
+          l.self?.ring || '',
+          l.self?.year || '',
+          '',
+          formatNodeSummary(l.sire),
+          formatNodeSummary(l.dam),
+          l.self?.details || ''
+        ]);
+      }
+
+      const csvContent = rows
+        .map((r) => r.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+
+      downloadFile(csvContent, 'loft-mahmoud-awed.csv', 'text/csv;charset=utf-8;');
+      showStatus('CSV file downloaded.');
+    }
+
+    function importJSON(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(String(reader.result || '{}'));
+          if (!Array.isArray(parsed.offspring) || !Array.isArray(parsed.parents)) {
+            showStatus('Invalid backup file format.', 'error');
+            return;
+          }
+          state.offspring = parsed.offspring;
+          state.parents = parsed.parents;
+          saveState();
+          renderOffspring();
+          renderParents();
+          populateParentDropdowns();
+          showStatus('Backup restored successfully.');
+        } catch (err) {
+          showStatus('Could not parse JSON file.', 'error');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function clearAllData() {
+      state.offspring = [];
+      state.parents = [];
+      saveState();
+      renderOffspring();
+      renderParents();
+      populateParentDropdowns();
+      showStatus('All records cleared.');
+    }
+
+    function downloadFile(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str).replace(/'/g, '&#39;');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePedigree();
+      }
+    });
+
+    // Initialize Application
+    loadState();
+    buildLineageInputs(createEmptyLineage());
+    populateParentDropdowns();
+    renderOffspring();
+  </script>
 </body>
 </html>
